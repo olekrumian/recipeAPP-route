@@ -12,13 +12,13 @@ import { recipes } from '../data/data'
 const allCategories = ['Всі', ...new Set(recipes.map((item) => item.category))]
 
 // loader
-export function dashboardLoader() {
-  const userName = fetchData('userName')
-  return { userName }
-}
+// export function dashboardLoader() {
+//   const userName = fetchData('userName')
+//   return { userName }
+// }
 
 const Dashboard = () => {
-  const { userName } = useLoaderData()
+  // const { userName } = useLoaderData()
   const [menuItem, setMenuItem] = useState(recipes)
   const [categories, setCategories] = useState(allCategories)
 

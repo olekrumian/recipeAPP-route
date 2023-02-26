@@ -1,13 +1,7 @@
 import find from '../assets/img/find.svg'
-import { recipes } from '../data/data.js'
-
-const fetchRecipes = recipes
+import { searchRecipe } from '../helper'
 
 export default function Header() {
-  function searchRecipe(e) {
-    console.log(fetchRecipes)
-  }
-
   return (
     <>
       <form className="header-form">

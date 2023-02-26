@@ -6,7 +6,7 @@ import './index.css'
 import Main, { mainLoader } from './layouts/Main'
 
 // Routes
-import Dashboard, { dashboardLoader } from './pages/Dashboard'
+import Dashboard from './pages/Dashboard'
 import Error from './pages/Error'
 
 const router = createBrowserRouter([
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
-        loader: dashboardLoader,
+        // loader: dashboardLoader,
       },
       {
         path: '/about',
