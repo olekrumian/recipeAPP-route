@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 // react router dom imports
 import { Outlet, useLoaderData } from 'react-router-dom'
 // Components
-import Header from '../components/Header'
+import Header from './Header'
 
 const Main = () => {
   return (

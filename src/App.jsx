@@ -3,7 +3,7 @@ import Recipe from './components/Recipe'
 import './index.css'
 
 // Layouts
-import Main from './layouts/Main'
+import Main from './components/Main'
 
 // Routes
 import Dashboard from './pages/Dashboard'
@@ -44,21 +44,3 @@ function App() {
 }
 
 export default App
-
-// import { BrowserRouter, Routes, Route } from 'react-router-dom'
-// import Main from './layouts/Main'
-// import Dashboard from './pages/Dashboard'
-
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<Main />}>
-//           <Route path="/" element={<Dashboard />} />
-//         </Route>
-//       </Routes>
-//     </BrowserRouter>
-//   )
-// }
-
-// export default App

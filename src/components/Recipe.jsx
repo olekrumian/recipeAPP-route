@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { recipes } from '../data/data'
-import Main from '../layouts/Main'
+import Main from './Main'
 
 const Recipe = () => {
   const { recipeId } = useParams()
