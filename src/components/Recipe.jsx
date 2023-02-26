@@ -5,15 +5,30 @@ import Main from './Main'
 const Recipe = () => {
   const { recipeId } = useParams()
   const recipe = recipes.find((recipe) => recipe.id === parseInt(recipeId))
-  const { image, name } = recipe
 
   return (
     <>
       <Main />
       <section className="container" key={recipeId}>
-        <h2>{name}</h2>
-        <img src={`/${image}`} width="250" alt={name} />
-        <Link to="/">На головну</Link>
+        {recipes.map((recipe) => {
+          const { image, name, srcIngredient } = recipe
+          if (recipe.id === parseInt(recipeId)) {
+            return (
+              <>
+                <h2>{name}</h2>
+                <img src={`/${image}`} width="250" alt={name} />
+                <ul>
+                  {srcIngredient.map((item) => {
+                    const key = Object.keys(item)[0]
+                    const value = item[key]
+                    return <li>{value}</li>
+                  })}
+                </ul>
+                <Link to="/">На головну</Link>
+              </>
+            )
+          }
+        })}
       </section>
     </>
   )
