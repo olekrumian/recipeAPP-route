@@ -12,7 +12,7 @@ const Recipe = () => {
       <Main />
       <section className="container" key={recipeId}>
         <h2>{name}</h2>
-        <img src={`/${image}`} width="100" alt={name} />
+        <img src={`/${image}`} width="250" alt={name} />
         <Link to="/">На головну</Link>
       </section>
     </>

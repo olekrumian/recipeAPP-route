@@ -3,7 +3,7 @@ import Recipe from './components/Recipe'
 import './index.css'
 
 // Layouts
-import Main, { mainLoader } from './layouts/Main'
+import Main from './layouts/Main'
 
 // Routes
 import Dashboard from './pages/Dashboard'
@@ -13,7 +13,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
-    // loader: mainLoader,
     children: [
       {
         index: true,
