@@ -17,7 +17,7 @@ const Recipe = () => {
               <>
                 <h2>{name}</h2>
                 <img src={`/${image}`} width="250" alt={name} />
-                <ul>
+                <ul key={recipe.toString()}>
                   {srcIngredient.map((item) => {
                     const key = Object.keys(item)[0]
                     const value = item[key]

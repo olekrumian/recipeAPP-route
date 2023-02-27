@@ -1,5 +1,12 @@
 import find from '../assets/img/find.svg'
-import { searchRecipe } from '../helper'
+import { recipes } from '../data/data'
+
+export const searchRecipe = (e) => {
+  const result = recipes.filter(
+    (item) => item.name.toLowerCase() === e.target.value
+  )
+  return console.log(result)
+}
 
 export default function Header() {
   return (
