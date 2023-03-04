@@ -312,7 +312,7 @@ h4 {
 }
 
 .to-home {
-  margin: 5rem 0rem 0rem 0rem;
+  margin: 5rem 0rem 5rem 0rem;
   font-family: var(--ff-primary);
   font-weight: 800;
   font-size: 4.6rem;
