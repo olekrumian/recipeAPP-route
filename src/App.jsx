@@ -19,10 +19,6 @@ const router = createBrowserRouter([
         element: <Dashboard />,
         // loader: dashboardLoader,
       },
-      {
-        path: '/about',
-        element: <p>about</p>,
-      },
     ],
   },
   {

@@ -8,27 +8,43 @@ const Recipe = () => {
 
   return (
     <>
-      <Main />
-      <section className="container" key={recipeId}>
-        {recipes.map((recipe) => {
-          const { image, name, srcIngredient } = recipe
+      <section className="container day-theme" key={recipeId}>
+        {recipes.map((recipe, index) => {
+          const { image, name, srcIngredient, description } = recipe
           if (recipe.id === parseInt(recipeId)) {
             return (
-              <>
-                <h2>{name}</h2>
-                <img src={`/${image}`} width="250" alt={name} />
-                <ul key={recipe.toString()}>
-                  {srcIngredient.map((item) => {
+              <div className="recipe-wrapper" key={index}>
+                <img
+                  className="recipe-img"
+                  src={`/${image}`}
+                  width="250"
+                  alt={name}
+                />
+                <h2 className="recipe-title">{name}</h2>
+                <ul className="recipe-ingredient-list" key={index}>
+                  {srcIngredient.map((item, index) => {
                     const key = Object.keys(item)[0]
                     const value = item[key]
-                    return <li>{value}</li>
+
+                    return <li key={index}>{value}</li>
                   })}
                 </ul>
-                <Link to="/">На головну</Link>
-              </>
+
+                <div className="recipe-description">
+                  {description.map((item, index) => {
+                    const key = Object.keys(item)[0]
+                    const value = item[key]
+
+                    return <p key={index}>&nbsp; {value}</p>
+                  })}
+                </div>
+              </div>
             )
           }
         })}
+        <Link className="to-home" to="/">
+          На головну
+        </Link>
       </section>
     </>
   )
