@@ -19,16 +19,16 @@ export const recipes = [
       },
     ],
     srcIngredient: [
-      { ingredient1: '450 г. пшеничного борошна' },
-      { ingredient2: 'Яйця' },
-      { ingredient3: '10 г сухих дріжджів' },
-      { ingredient4: '250 мл. теплого молока' },
-      { ingredient5: '1 ст. л. цукру' },
-      { ingredient6: '½ ч. л. солі' },
-      { ingredient7: '3 зубчики часнику' },
-      { ingredient8: '6 гілочок кропу' },
-      { ingredient9: '2 ст. л. соняшникової олії' },
-      { ingredient10: 'Сіль та перець до смаку' },
+      { ingredient1: '450 г. пшеничного борошна', id: 0 },
+      { ingredient2: 'Яйця', id: 1 },
+      { ingredient3: '10 г сухих дріжджів', id: 2 },
+      { ingredient4: '250 мл. теплого молока', id: 3 },
+      { ingredient5: '1 ст. л. цукру', id: 4 },
+      { ingredient6: '½ ч. л. солі', id: 5 },
+      { ingredient7: '3 зубчики часнику', id: 6 },
+      { ingredient8: '6 гілочок кропу', id: 7 },
+      { ingredient9: '2 ст. л. соняшникової олії', id: 8 },
+      { ingredient10: 'Сіль та перець до смаку', id: 9 },
       {
         ingredient11:
           '100 г розм’якшеного вершкового масла або соняшникової олії (+ для змащування форми)',
@@ -234,7 +234,7 @@ export const recipes = [
   },
   {
     id: 5,
-    name: 'Лазанья',
+    name: 'Лазан`я',
     category: 'Вечеря',
     image: './image/lazania_sitewebukrnew.jpeg',
     iconInfo: [
