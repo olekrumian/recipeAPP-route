@@ -20,15 +20,14 @@ export const recipes = [
     ],
     srcIngredient: [
       { ingredient1: '450 г. пшеничного борошна', id: 0 },
-      { ingredient2: 'Яйця', id: 1 },
-      { ingredient3: '10 г сухих дріжджів', id: 2 },
-      { ingredient4: '250 мл. теплого молока', id: 3 },
-      { ingredient5: '1 ст. л. цукру', id: 4 },
-      { ingredient6: '½ ч. л. солі', id: 5 },
-      { ingredient7: '3 зубчики часнику', id: 6 },
-      { ingredient8: '6 гілочок кропу', id: 7 },
-      { ingredient9: '2 ст. л. соняшникової олії', id: 8 },
-      { ingredient10: 'Сіль та перець до смаку', id: 9 },
+      { ingredient2: '10 г сухих дріжджів', id: 1 },
+      { ingredient3: '250 мл. теплого молока', id: 2 },
+      { ingredient4: '1 ст. л. цукру', id: 3 },
+      { ingredient5: '½ ч. л. солі', id: 4 },
+      { ingredient6: '3 зубчики часнику', id: 5 },
+      { ingredient7: '6 гілочок кропу', id: 6 },
+      { ingredient8: '2 ст. л. соняшникової олії', id: 7 },
+      { ingredient9: 'Сіль та перець до смаку', id: 8 },
       {
         ingredient11:
           '100 г розм’якшеного вершкового масла або соняшникової олії (+ для змащування форми)',
@@ -236,7 +235,7 @@ export const recipes = [
     id: 6,
     name: 'Журек польский',
     category: 'Обід',
-    image: './image/zurek-przepis.jpg',
+    image: './image/zurek-przepis.jpeg',
     iconInfo: [
       {
         image: './icon/time.svg',
