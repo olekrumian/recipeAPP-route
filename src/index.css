@@ -322,8 +322,8 @@ h4 {
 .to-back {
   display: flex;
   font-family: var(--ff-primary);
-  font-weight: 800;
-  font-size: 3.2rem;
+  font-weight: 600;
+  font-size: 2rem;
   color: var(--font-color);
 }
 
