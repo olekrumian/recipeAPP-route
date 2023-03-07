@@ -281,8 +281,8 @@ h4 {
 .recipe-title {
   margin: 1rem 0rem 0rem 0rem;
   font-family: var(--ff-primary);
-  font-weight: 800;
-  font-size: 3.6rem;
+  font-weight: 600;
+  font-size: 3rem;
   color: var(--font-color);
 }
 
@@ -298,7 +298,7 @@ h4 {
 .recipe-ingredient-list {
   margin: 1rem 0rem 0rem 0rem;
   font-family: var(--ff-primary);
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.6rem;
   color: var(--font-color);
 }
