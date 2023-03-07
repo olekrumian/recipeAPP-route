@@ -275,7 +275,7 @@ h4 {
 }
 
 .recipe-wrapper {
-  margin: 4rem 0rem 0rem 0rem;
+  margin: 0rem 0rem 5rem 0rem;
 }
 
 .recipe-title {
@@ -311,10 +311,22 @@ h4 {
   color: var(--font-color);
 }
 
-.to-home {
-  margin: 5rem 0rem 5rem 0rem;
+.header-menu-wrapper {
+  margin: 1rem 0rem 1rem 0rem;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+}
+
+.to-back {
+  display: flex;
   font-family: var(--ff-primary);
   font-weight: 800;
-  font-size: 4.6rem;
+  font-size: 3.2rem;
   color: var(--font-color);
+}
+
+.to-back img {
+  margin-right: 1rem;
 }

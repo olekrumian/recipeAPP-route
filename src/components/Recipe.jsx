@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { recipes } from '../data/data'
-import Main from './Main'
+import back from '../assets/img/backarrov.svg'
 
 const Recipe = () => {
   const { recipeId } = useParams()
@@ -9,6 +9,12 @@ const Recipe = () => {
   return (
     <>
       <section className="container day-theme" key={recipeId}>
+        <div className="header-menu-wrapper">
+          <Link className="to-back" to="/">
+            <img src={back} alt="" />
+            <span>Назад</span>
+          </Link>
+        </div>
         {recipes.map((recipe, index) => {
           const { image, name, srcIngredient, description } = recipe
           if (recipe.id === parseInt(recipeId)) {
@@ -42,9 +48,6 @@ const Recipe = () => {
             )
           }
         })}
-        <Link className="to-home" to="/">
-          На головну
-        </Link>
       </section>
     </>
   )
