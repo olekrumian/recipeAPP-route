@@ -22,7 +22,7 @@ const Dashboard = () => {
   const searchRecipe = (e) => {
     e.preventDefault()
     const result = recipes.filter((item) =>
-      item.name.toLowerCase().includes(e.target.value)
+      item.name.toLowerCase().includes(e.target.value.toLowerCase())
     )
     if (result < 1) {
       setMenuItem(recipes)
