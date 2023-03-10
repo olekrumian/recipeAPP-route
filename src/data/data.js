@@ -68,7 +68,7 @@ export const recipes = [
     iconInfo: [
       {
         image: './icon/time.svg',
-        info: '1г. 30 хв.',
+        info: '2г. 30 хв.',
       },
       {
         image: './icon/difficulty.svg',

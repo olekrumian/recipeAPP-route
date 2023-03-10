@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // Components
 import Header from '../components/Header'
 import Categories from '../components/Categories'
