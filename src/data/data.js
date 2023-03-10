@@ -7,7 +7,7 @@ export const recipes = [
     iconInfo: [
       {
         image: './icon/time.svg',
-        info: '40 хв.',
+        info: '1г. 40 хв.',
       },
       {
         image: './icon/difficulty.svg',
@@ -20,7 +20,7 @@ export const recipes = [
     ],
     srcIngredient: [
       { ingredient1: '450 г. пшеничного борошна', id: 0 },
-      { ingredient2: '10 г сухих дріжджів', id: 1 },
+      { ingredient2: '10 г. сухих дріжджів', id: 1 },
       { ingredient3: '250 мл. теплого молока', id: 2 },
       { ingredient4: '1 ст. л. цукру', id: 3 },
       { ingredient5: '½ ч. л. солі', id: 4 },
@@ -80,16 +80,14 @@ export const recipes = [
       },
     ],
     srcIngredient: [
-      { ingredient1: '40 грам кефіру ' },
-      { ingredient2: '80 грам води' },
-      {
-        ingredient3: '80 грам яєчних жовтків',
-      },
-      { ingredient4: '310 грам борошна' },
-      { ingredient5: '4 грам сухих дріжджів' },
-      { ingredient6: '6 грам солі' },
-      { ingredient7: '30 грам цукру' },
-      { ingredient8: '50 грам вершкового масла' },
+      { ingredient1: '4 г. сухих дріжджів' },
+      { ingredient2: '6 г. солі' },
+      { ingredient3: '40 г. кефіру ' },
+      { ingredient4: '80 г. води' },
+      { ingredient5: '80 г. яєчних жовтків' },
+      { ingredient6: '30 г. цукру' },
+      { ingredient7: '50 г. вершкового масла' },
+      { ingredient8: '310 г. борошна' },
     ],
     description: [
       {
@@ -146,7 +144,7 @@ export const recipes = [
         ingredient3: '500 мілілітрів закваски житньої',
       },
       { ingredient4: '4 копчені ковбаски' },
-      { ingredient5: '200 грам бекону копченого' },
+      { ingredient5: '200 г. бекону копченого' },
       { ingredient6: '1 велика цибуля' },
       { ingredient7: '2 чайні ложки хрону' },
       { ingredient8: '1 зубок часнику' },
