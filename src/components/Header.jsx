@@ -1,18 +1,14 @@
 import find from '../assets/img/find.svg'
 import { recipes } from '../data/data'
 
-export const searchRecipe = (e) => {
+const handleSubmit = (e) => {
   e.preventDefault()
-  const result = recipes.filter(
-    (item) => item.name.toLowerCase() === e.target.value
-  )
-  return result
 }
 
-export default function Header() {
+export default function Header({ searchRecipe }) {
   return (
     <>
-      <form className="header-form">
+      <form className="header-form" onSubmit={handleSubmit}>
         <input
           type="text"
           name="recipe"

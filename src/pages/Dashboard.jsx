@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 // Components
+import Header from '../components/Header'
 import Categories from '../components/Categories'
 import RecipeList from '../components/RecipeList'
-import BtnToTop from '../components/BtnToTop'
 import { recipes } from '../data/data'
 
 const allCategories = ['Всі', ...new Set(recipes.map((item) => item.category))]
@@ -19,11 +19,23 @@ const Dashboard = () => {
     setMenuItem(newItem)
   }
 
+  const searchRecipe = (e) => {
+    e.preventDefault()
+    const result = recipes.filter((item) =>
+      item.name.toLowerCase().includes(e.target.value)
+    )
+    if (result < 1) {
+      setMenuItem(recipes)
+    } else {
+      return setMenuItem(result)
+    }
+  }
+
   return (
     <>
+      <Header searchRecipe={searchRecipe} />
       <Categories categories={categories} filterItem={filterItem} />
       <RecipeList menuItem={menuItem} />
-      <BtnToTop />
     </>
   )
 }

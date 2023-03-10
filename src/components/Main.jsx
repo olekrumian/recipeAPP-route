@@ -7,7 +7,6 @@ import Header from './Header'
 const Main = () => {
   return (
     <div className="container day-theme">
-      <Header />
       <Outlet />
     </div>
   )
