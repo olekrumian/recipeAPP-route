@@ -24,11 +24,8 @@ const Dashboard = () => {
     const result = recipes.filter((item) =>
       item.name.toLowerCase().includes(e.target.value.toLowerCase())
     )
-    if (result < 1) {
-      setMenuItem(recipes)
-    } else {
-      return setMenuItem(result)
-    }
+
+    return setMenuItem(result)
   }
 
   return (
