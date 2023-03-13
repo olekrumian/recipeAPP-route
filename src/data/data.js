@@ -477,4 +477,49 @@ export const recipes = [
       },
     ],
   },
+
+  {
+    id: 9,
+    name: 'Сирна запіканка',
+    category: 'Десерт',
+    image: './image/syrna-zapikanka.jpeg',
+    iconInfo: [
+      {
+        image: './icon/time.svg',
+        info: '1г. 50 хв.',
+      },
+      {
+        image: './icon/difficulty.svg',
+        info: '6/10',
+      },
+      {
+        image: './icon/person.svg',
+        info: '8 о.',
+      },
+    ],
+    srcIngredient: [
+      { ingredient1: '1 кг. сир ' },
+      { ingredient2: '80 гр. сметана' },
+      {
+        ingredient3: '1-2 шт. яйця',
+      },
+      { ingredient4: '60 гр. манна крупа' },
+      { ingredient5: '80 г. масло вершкове' },
+      { ingredient6: '60 г. цукру' },
+      { ingredient7: 'Ванільний цукор' },
+    ],
+    description: [
+      {
+        step1:
+          'Змішати сир з манною кашею та цукром, додаємо яйця, ванільний цукор та розтоплене вершкове масло.',
+      },
+      {
+        step2: 'Вирівнюємо запіканку у формі, змащуємо сметаною.',
+      },
+      {
+        step3:
+          'Відправляємо в духовку при 220 ℃ ~ на 30 хвилин, запікаємо до золотистого кольору.',
+      },
+    ],
+  },
 ]
