@@ -11,6 +11,10 @@ const Dashboard = () => {
   const [menuItem, setMenuItem] = useState(recipes)
   const [categories, setCategories] = useState(allCategories)
 
+  const resetList = () => {
+    setMenuItem(recipes)
+  }
+
   const filterItem = (category) => {
     if (category === 'Всі') {
       return setMenuItem(recipes)
@@ -20,7 +24,6 @@ const Dashboard = () => {
   }
 
   const searchRecipe = (e) => {
-    e.preventDefault()
     const result = recipes.filter((item) =>
       item.name.toLowerCase().includes(e.target.value.toLowerCase())
     )
@@ -32,7 +35,7 @@ const Dashboard = () => {
     <>
       <Header searchRecipe={searchRecipe} />
       <Categories categories={categories} filterItem={filterItem} />
-      <RecipeList menuItem={menuItem} />
+      <RecipeList menuItem={menuItem} resetList={resetList} />
     </>
   )
 }

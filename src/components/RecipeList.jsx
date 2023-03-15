@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import bake from '../assets/img/bake.svg'
 
-export default function RecipeList({ menuItem }) {
+export default function RecipeList({ menuItem, resetList }) {
   if (menuItem.length < 1) {
     return (
-      <div className="error-find">
+      <div className="error-find" onClick={resetList}>
         <h3 className="error-title">
           Нічого не знайдено, спробуй пошукати щось інше
         </h3>
