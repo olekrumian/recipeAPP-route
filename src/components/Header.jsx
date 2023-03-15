@@ -22,9 +22,7 @@ export default function Header({ searchRecipe }) {
             <img src={find} alt="Пошук" />
           </button>
         </form>
-        <div className="favorite-wrapper">
-          <button className="favorite-button">Like</button>
-        </div>
+        <button className="favorite-button">Like</button>
       </div>
     </>
   )
