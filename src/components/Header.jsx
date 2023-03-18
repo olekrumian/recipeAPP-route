@@ -1,4 +1,5 @@
 import find from '../assets/img/find.svg'
+import favouriteBook from '../assets/img/favourite_book.svg'
 import { recipes } from '../data/data'
 
 const handleSubmit = (e) => {
@@ -22,7 +23,10 @@ export default function Header({ searchRecipe }) {
             <img src={find} alt="Пошук" />
           </button>
         </form>
-        <button className="favorite-button">Like</button>
+        <button className="favorite-button">
+          <img src={favouriteBook} alt="" />
+          <span className="active-favorite">3</span>
+        </button>
       </div>
     </>
   )
