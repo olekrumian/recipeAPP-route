@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import bake from '../assets/img/bake.svg'
+import favoriteImg from '../assets/img/heart.svg'
 
 export default function RecipeList({ menuItem, resetList }) {
   if (menuItem.length < 1) {
     return (
-      <div className="error-find" onClick={resetList}>
+      <div
+        className="error-find"
+        onClick={() => {
+          resetList()
+        }}
+      >
         <h3 className="error-title">
           Нічого не знайдено, спробуй пошукати щось інше
         </h3>
@@ -23,7 +29,18 @@ export default function RecipeList({ menuItem, resetList }) {
                   <img src={recipe.image} alt={recipe.name} />
                 </div>
                 <div className="description">
-                  <h3 className="description-title">{recipe.name}</h3>
+                  <div className="description-title-wrapper">
+                    <h3 className="description-title">{recipe.name}</h3>
+                    <button
+                      className="favorite-btn"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        console.log('added to favorite')
+                      }}
+                    >
+                      <img src={favoriteImg} alt="" />
+                    </button>
+                  </div>
                   <div className="description-info">
                     {recipe.iconInfo.map((item, id) => {
                       return (

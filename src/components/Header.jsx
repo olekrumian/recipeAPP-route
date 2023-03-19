@@ -1,6 +1,5 @@
 import find from '../assets/img/find.svg'
 import favouriteBook from '../assets/img/favourite_book.svg'
-import { recipes } from '../data/data'
 
 const handleSubmit = (e) => {
   e.preventDefault()

@@ -326,12 +326,24 @@ main {
   justify-content: space-between;
 }
 
+.description-title-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .description-title {
   font-family: var(--ff-primary);
   font-weight: 300;
   font-size: 2rem;
   color: var(--font-color);
 }
+
+.favorite-btn {
+  border: none;
+  z-index: 2;
+}
+
 .description-info {
   display: flex;
   flex-direction: row;
