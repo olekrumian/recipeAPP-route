@@ -31,9 +31,14 @@ const Dashboard = () => {
     return setMenuItem(result)
   }
 
+  //TODO - function favorite recipes list
+  const favoriteList = () => {
+    return console.log('ít is work')
+  }
+
   return (
     <>
-      <Header searchRecipe={searchRecipe} />
+      <Header searchRecipe={searchRecipe} favoriteList={favoriteList} />
       <Categories categories={categories} filterItem={filterItem} />
       <RecipeList menuItem={menuItem} resetList={resetList} />
     </>

@@ -5,7 +5,7 @@ const handleSubmit = (e) => {
   e.preventDefault()
 }
 
-export default function Header({ searchRecipe }) {
+export default function Header({ searchRecipe, favoriteList }) {
   return (
     <>
       <div className="header-wrapper">
@@ -22,7 +22,13 @@ export default function Header({ searchRecipe }) {
             <img src={find} alt="Пошук" />
           </button>
         </form>
-        <button className="favorite-button">
+        <button
+          className="favorite-button"
+          onClick={() => {
+            //TODO - favorite recipes list
+            favoriteList()
+          }}
+        >
           <img src={favouriteBook} alt="" />
           <span className="active-favorite">3</span>
         </button>
