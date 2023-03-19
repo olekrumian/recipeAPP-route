@@ -41,7 +41,11 @@ const Recipe = () => {
                     const key = Object.keys(item)[0]
                     const value = item[key]
 
-                    return <p key={index}>&nbsp; {value}</p>
+                    return (
+                      <p key={index}>
+                        <strong>{index + 1}.</strong> {value}
+                      </p>
+                    )
                   })}
                 </div>
               </div>
