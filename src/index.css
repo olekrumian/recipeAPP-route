@@ -342,6 +342,7 @@ main {
 .favorite-btn {
   border: none;
   z-index: 2;
+  background-color: transparent;
 }
 
 .description-info {

@@ -575,7 +575,7 @@ export const recipes = [
   {
     id: 11,
     name: 'Дріжджова паска',
-    category: 'Додатки',
+    category: 'Десерт',
     image: './image/paska.jpeg',
     iconInfo: [
       {
