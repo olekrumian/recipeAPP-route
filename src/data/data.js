@@ -502,7 +502,7 @@ export const recipes = [
       {
         ingredient3: '1-2 шт. яйця',
       },
-      { ingredient4: '60 гр. манна крупа' },
+      { ingredient4: '60 г. манна крупа' },
       { ingredient5: '80 г. масло вершкове' },
       { ingredient6: '60 г. цукру' },
       { ingredient7: 'Ванільний цукор' },
@@ -569,6 +569,51 @@ export const recipes = [
       {
         step5:
           'Злийте воду з цибулі, використовуючи друшляк, бо зайва рідина нам не потрібна. Перекладіть в глибоку миску, додайте кріп та перемішайте.',
+      },
+    ],
+  },
+  {
+    id: 11,
+    name: 'Дріжджова паска',
+    category: 'Додатки',
+    image: './image/paska.jpeg',
+    iconInfo: [
+      {
+        image: './icon/time.svg',
+        info: '1г.20 хв.',
+      },
+      {
+        image: './icon/difficulty.svg',
+        info: '8/10',
+      },
+      {
+        image: './icon/person.svg',
+        info: '6 о.',
+      },
+    ],
+    srcIngredient: [
+      { ingredient1: '100 г. свіжі дріжджі' },
+      { ingredient2: '1 л. молоко' },
+      {
+        ingredient3: '0.5 л. сметана',
+      },
+      { ingredient4: '1 кг. цукор' },
+      { ingredient5: '20 шт. яйця' },
+      { ingredient5: '700 г. вершкове масло' },
+      { ingredient5: '3 кг. борошно' },
+    ],
+    description: [
+      {
+        step1: 'Все з`єднуємо і вимішуємо тісто.',
+      },
+      {
+        step2: 'Ставимо в холодильник ночувати.',
+      },
+      {
+        step3: 'Змащуємо формочки олією.',
+      },
+      {
+        step4: 'Ставимо у розігріту духовку, 180 градусів',
       },
     ],
   },

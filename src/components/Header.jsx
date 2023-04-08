@@ -30,7 +30,7 @@ export default function Header({ searchRecipe, favoriteList }) {
           }}
         >
           <img src={favouriteBook} alt="" />
-          <span className="active-favorite">3</span>
+          {/* <span className="active-favorite">3</span> */}
         </button>
       </div>
     </>
