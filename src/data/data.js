@@ -617,4 +617,90 @@ export const recipes = [
       },
     ],
   },
+  {
+    id: 12,
+    name: 'Сирне Берлінське печиво',
+    category: 'Десерт',
+    image: './image/videnske-pechyvo.jpeg',
+    iconInfo: [
+      {
+        image: './icon/time.svg',
+        info: '2г.20 хв.',
+      },
+      {
+        image: './icon/difficulty.svg',
+        info: '4/10',
+      },
+      {
+        image: './icon/person.svg',
+        info: '5 о.',
+      },
+    ],
+    srcIngredient: [
+      { ingredient1: '250 г. сиру' },
+      { ingredient2: '250 г. борошна' },
+      {
+        ingredient3: '2 ч.л. розпушувача',
+      },
+      { ingredient4: '200 г. масла' },
+    ],
+    description: [
+      {
+        step1: 'Сир розтерти блендером.',
+      },
+      {
+        step2: 'Все з`єднуємо і вимішуємо тісто.',
+      },
+      {
+        step3: 'Відправляємо на 1 годину в холодильник',
+      },
+      {
+        step4:
+          'Потім ділимо на кульки і розкачуємо посипаємо цукром і з обох сторін зкручуємо ковбаску.',
+      },
+      {
+        step5:
+          'Нарізаємо десь по 2 см, приплюскуємо і посипаємо цукром. Випікаємо при 180 градусах.',
+      },
+    ],
+  },
+  {
+    id: 13,
+    name: 'Пісочне горіхове печиво',
+    category: 'Десерт',
+    image: './image/pisochne_gorichove.jpeg',
+    iconInfo: [
+      {
+        image: './icon/time.svg',
+        info: '2г.30 хв.',
+      },
+      {
+        image: './icon/difficulty.svg',
+        info: '5/10',
+      },
+      {
+        image: './icon/person.svg',
+        info: '4 о.',
+      },
+    ],
+    srcIngredient: [
+      { ingredient1: '100 г. білий шоколад(можна замінити чорним)' },
+      { ingredient2: '8 г. розпушувач' },
+      {
+        ingredient3: '150 г. горіхи волоські(обсмажені)',
+      },
+      { ingredient4: '150 г. цукор' },
+      { ingredient5: '2 шт. яйця' },
+      { ingredient5: '125 г. вершкове масло' },
+      { ingredient5: '380 г. борошно' },
+    ],
+    description: [
+      {
+        step1: 'Все з`єднуємо і вимішуємо тісто.',
+      },
+      {
+        step2: 'Випікаємо при температурі 180 градусів. від 15 до 18 хвилин.',
+      },
+    ],
+  },
 ]

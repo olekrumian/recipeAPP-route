@@ -10,6 +10,7 @@ const allCategories = ['Всі', ...new Set(recipes.map((item) => item.category)
 const Dashboard = () => {
   const [menuItem, setMenuItem] = useState(recipes)
   const [categories, setCategories] = useState(allCategories)
+  const [showFavorite, setShowFavorite] = useState(false)
 
   const resetList = () => {
     setMenuItem(recipes)

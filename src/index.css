@@ -345,6 +345,10 @@ main {
   background-color: transparent;
 }
 
+.favorite-btn-active > svg {
+  fill: rgb(255, 115, 115);
+}
+
 .description-info {
   display: flex;
   flex-direction: row;
