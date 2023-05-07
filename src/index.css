@@ -526,6 +526,7 @@ main {
 }
 .favorite-close-button {
   margin: 0 auto 2rem;
+  padding: 1rem 0;
   width: 98%;
   height: 5rem;
   border: var(--border);
