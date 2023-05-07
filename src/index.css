@@ -81,7 +81,7 @@ h4 {
   --btn-active-text-color: #f9f7f7;
   --primary-cart-color: rgba(219, 226, 239, 0.5);
   --primary-color: rgba(219, 226, 239, 0.5);
-  --shadow: 0px 4px 10px #e6e6e6;
+  --shadow: 0 0.4rem 1rem #e6e6e6;
   --border: 0.1rem solid #dde1ea;
   --transition: all 0.3s ease-in-out;
 }
@@ -93,7 +93,7 @@ h4 {
   --btn-active-text-color: #b6eada;
   --primary-cart-color: rgba(17, 45, 78);
   --primary-color: rgba(182, 234, 218, 0.5);
-  --shadow: 0px 4px 10px #e6e6e6;
+  --shadow: 0 0.4rem 1rem #e6e6e6;
   --border: 0.1rem solid #dde1ea;
   --transition: all 0.3s ease-in-out;
 }
@@ -162,7 +162,9 @@ h4 {
 main {
   width: 100%;
 }
-
+.no-scroll {
+  overflow: hidden;
+}
 .container {
   margin: 0 auto;
   max-width: 90%;
@@ -172,11 +174,13 @@ main {
   justify-content: start;
   align-items: center;
   background: var(--bg-color);
+  scrollbar-width: none;
 }
 
 .header-wrapper {
-  margin: 3.6rem 0rem 0rem 0rem;
-  width: 100%;
+  position: relative;
+  margin: 3.6rem auto 0rem;
+  width: 98%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -197,7 +201,7 @@ main {
   position: absolute;
   padding: 0.25rem 0;
   top: -1rem;
-  right: -1rem;
+  left: -1rem;
   width: 2rem;
   height: 2rem;
   background-color: red;
@@ -296,8 +300,8 @@ main {
 
 .recipe-item {
   padding: 1rem;
-  margin: 0rem 0rem 1.6rem 0rem;
-  width: 100%;
+  margin: 0rem auto 1.6rem;
+  width: 98%;
   height: 9.5rem;
   display: flex;
   flex-direction: row;
@@ -339,11 +343,14 @@ main {
   font-weight: 300;
   font-size: 2rem;
   color: var(--font-color);
+  width: 17rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .favorite-btn {
   border: none;
-  z-index: 2;
   background-color: transparent;
 }
 
@@ -466,4 +473,56 @@ main {
   font-size: 2rem;
   line-height: 2.4rem;
   color: var(--font-color);
+}
+.favorite-container {
+  padding: 4rem 5%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0%;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  background: var(--bg-color);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  border-radius: var(--border);
+  -webkit-border-radius: var(--border);
+  -moz-border-radius: var(--border);
+  -ms-border-radius: var(--border);
+  -o-border-radius: var(--border);
+  transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -ms-transition: var(--transition);
+  -o-transition: var(--transition);
+}
+.favorite-container-hiden {
+  display: none;
+}
+.favorite-description-title {
+  font-size: 2rem;
+  width: 16rem;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.favorite-close-button {
+  margin: 0 auto 2rem;
+  width: 98%;
+  height: 5rem;
+  border: var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 1rem;
+  background: var(--primary-cart-color);
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  font-family: var(--ff-primary);
+  font-weight: 300;
+  font-size: 2rem;
+}
+.favorite-svg-cross g {
+  fill: var(--font-color);
 }

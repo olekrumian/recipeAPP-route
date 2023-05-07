@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import bake from '../assets/img/bake.svg'
-import favoriteImg from '../assets/img/heart.svg'
 
 export default function RecipeList({
   menuItem,
@@ -17,6 +16,9 @@ export default function RecipeList({
         className="error-find"
         onClick={() => {
           resetList()
+          //TODO - reset input value
+          // reset input value
+          document.querySelector('.search-input').value = ''
         }}
       >
         <h3 className="error-title">

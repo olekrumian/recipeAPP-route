@@ -1,10 +1,15 @@
 import { Link, useParams } from 'react-router-dom'
 import { recipes } from '../data/data'
 import back from '../assets/img/backarrov.svg'
+import { useEffect } from 'react'
 
 const Recipe = () => {
   const { recipeId } = useParams()
   const recipe = recipes.find((recipe) => recipe.id === parseInt(recipeId))
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <>

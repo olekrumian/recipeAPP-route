@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Categories from '../components/Categories'
 import RecipeList from '../components/RecipeList'
+import Favorite from '../components/Favorite'
 import { recipes } from '../data/data'
 
 const allCategories = ['Всі', ...new Set(recipes.map((item) => item.category))]
@@ -11,8 +12,7 @@ const Dashboard = () => {
   const [menuItem, setMenuItem] = useState(recipes)
   const [categories, setCategories] = useState(allCategories)
   const [favorites, setFavorites] = useState([])
-
-  console.log(favorites.map((item) => item.id))
+  const [favoriteOpen, setFavoriteOpen] = useState(true)
 
   //*Reset list
   const resetList = () => {
@@ -36,9 +36,10 @@ const Dashboard = () => {
     return setMenuItem(result)
   }
 
-  //TODO - function favorite recipes list
-  const favoriteList = () => {
-    return console.log('ít is work')
+  const toggleFavorite = () => {
+    setFavoriteOpen(!favoriteOpen)
+    document.body.classList.toggle('no-scroll', favoriteOpen)
+    window.scrollTo(0, 0)
   }
 
   const handleAddToFavorites = (recipe) => {
@@ -63,10 +64,16 @@ const Dashboard = () => {
 
   return (
     <>
+      <Favorite
+        favorites={favorites}
+        favoriteOpen={favoriteOpen}
+        toggleFavorite={toggleFavorite}
+        handleAddToFavorites={handleAddToFavorites}
+      />
       <Header
         searchRecipe={searchRecipe}
-        favoriteList={favoriteList}
         favorites={favorites}
+        toggleFavorite={toggleFavorite}
       />
       <Categories categories={categories} filterItem={filterItem} />
       <RecipeList
