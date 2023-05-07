@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import bake from '../assets/img/bake.svg'
 import favoriteImg from '../assets/img/heart.svg'
 
-export default function RecipeList({ menuItem, resetList }) {
-  const [favorites, setFavorites] = useState([])
-  const handleAddToFavorites = (recipe) => {
-    if (!favorites.find((fav) => fav.id === recipe.id)) {
-      setFavorites([...favorites, recipe])
-      console.log('Added to favorites:', recipe.name)
-    }
-  }
+export default function RecipeList({
+  menuItem,
+  resetList,
+  handleAddToFavorites,
+  favorites,
+}) {
+  const sortedMenuItem = menuItem.sort((a, b) => a.name.localeCompare(b.name))
 
   if (menuItem.length < 1) {
     return (
@@ -29,7 +28,7 @@ export default function RecipeList({ menuItem, resetList }) {
   } else {
     return (
       <section className="recipe-list-wrapper">
-        {menuItem.map((recipe, index) => {
+        {sortedMenuItem.map((recipe, index) => {
           return (
             <Link key={index} to={`/recipe/${recipe.id}`}>
               <div key={index} className="recipe-item">
@@ -40,7 +39,7 @@ export default function RecipeList({ menuItem, resetList }) {
                   <div className="description-title-wrapper">
                     <h3 className="description-title">{recipe.name}</h3>
                     <button
-                      className="favorite-btn "
+                      className="favorite-btn"
                       onClick={(e) => {
                         e.preventDefault()
                         handleAddToFavorites(recipe)

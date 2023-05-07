@@ -190,8 +190,10 @@ main {
   background-color: transparent;
   border: none;
 }
-
-.favorite-button span.active-favorite {
+.non-favorite {
+  display: none;
+}
+.active-favorite {
   position: absolute;
   padding: 0.25rem 0;
   top: -1rem;

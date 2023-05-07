@@ -5,7 +5,7 @@ const handleSubmit = (e) => {
   e.preventDefault()
 }
 
-export default function Header({ searchRecipe, favoriteList }) {
+export default function Header({ searchRecipe, favoriteList, favorites }) {
   return (
     <>
       <div className="header-wrapper">
@@ -30,7 +30,13 @@ export default function Header({ searchRecipe, favoriteList }) {
           }}
         >
           <img src={favouriteBook} alt="" />
-          {/* <span className="active-favorite">3</span> */}
+          <span
+            className={
+              favorites.length > 0 ? 'active-favorite' : 'non-favorite'
+            }
+          >
+            {favorites ? favorites.length : 0}
+          </span>
         </button>
       </div>
     </>
