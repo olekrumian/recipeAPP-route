@@ -9,6 +9,7 @@ const Recipe = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    document.body.classList.remove('no-scroll')
   }, [])
 
   return (
