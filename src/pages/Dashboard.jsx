@@ -40,6 +40,7 @@ const Dashboard = () => {
     setFavoriteOpen(!favoriteOpen)
     window.scrollTo(0, 0)
   }
+  console.log(favorites.map((item) => item.id))
 
   const handleAddToFavorites = (recipe) => {
     if (!favorites.find((fav) => fav.id === recipe.id)) {

@@ -31,6 +31,10 @@ export default function RecipeList({
     return (
       <section className="recipe-list-wrapper">
         {sortedMenuItem.map((recipe, index) => {
+          const isFavorite = favorites.some(
+            (favorite) => favorite.id === recipe.id
+          )
+
           return (
             <Link key={index} to={`/recipe/${recipe.id}`}>
               <div key={index} className="recipe-item">
@@ -41,7 +45,9 @@ export default function RecipeList({
                   <div className="description-title-wrapper">
                     <h3 className="description-title">{recipe.name}</h3>
                     <button
-                      className="favorite-btn"
+                      className={`favorite-btn ${
+                        isFavorite ? 'favorite-btn-active' : ''
+                      }`}
                       onClick={(e) => {
                         e.preventDefault()
                         handleAddToFavorites(recipe)
