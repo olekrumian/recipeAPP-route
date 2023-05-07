@@ -522,7 +522,5 @@ main {
   font-family: var(--ff-primary);
   font-weight: 300;
   font-size: 2rem;
-}
-.favorite-svg-cross g {
-  fill: var(--font-color);
+  color: var(--font-color);
 }
