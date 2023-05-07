@@ -352,6 +352,9 @@ main {
 .favorite-btn {
   border: none;
   background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .favorite-btn-active > svg {
@@ -500,6 +503,9 @@ main {
 .favorite-container-hiden {
   display: none;
 }
+.favorite-description {
+  width: 100%;
+}
 .favorite-description-title {
   font-size: 2rem;
   width: 16rem;
@@ -523,4 +529,11 @@ main {
   font-weight: 300;
   font-size: 2rem;
   color: var(--font-color);
+}
+.favorite-btn-delete {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

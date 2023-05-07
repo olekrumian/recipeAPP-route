@@ -22,13 +22,13 @@ export default function Favorite({
             <div className="image">
               <img src={favorite.image} alt={favorite.name} />
             </div>
-            <div className="description">
+            <div className="description favorite-description">
               <div className="description-title-wrapper">
                 <h3 className="description-title favorite-description-title">
                   {favorite.name}
                 </h3>
                 <button
-                  className="favorite-btn"
+                  className="favorite-btn favorite-btn-delete"
                   onClick={(e) => {
                     e.preventDefault()
                     handleAddToFavorites(favorite)
@@ -38,8 +38,8 @@ export default function Favorite({
                     className="favorite-svg-cross"
                     version="1.0"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="15"
-                    height="15"
+                    width="18"
+                    height="18"
                     viewBox="0 0 128 128"
                     preserveAspectRatio="xMidYMid meet"
                   >
