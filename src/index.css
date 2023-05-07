@@ -358,7 +358,7 @@ main {
 }
 
 .favorite-btn-active > svg {
-  fill: rgb(255, 115, 115);
+  fill: rgb(255, 172, 172);
 }
 
 .description-info {
