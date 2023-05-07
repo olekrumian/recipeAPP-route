@@ -199,13 +199,14 @@ main {
 }
 .active-favorite {
   position: absolute;
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
   top: -1rem;
   left: -1rem;
-  width: 2rem;
-  height: 2rem;
-  background-color: red;
-  color: var(--bg-color);
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgb(255, 172, 172);
+  color: var(--font-color);
+  font-size: 1.4rem;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -357,8 +358,10 @@ main {
   align-items: center;
 }
 
-.favorite-btn-active > svg {
+.favorite-btn-active > svg,
+.favorite-btn-active > svg > path {
   fill: rgb(255, 172, 172);
+  stroke: rgb(255, 172, 172);
 }
 
 .description-info {
@@ -404,6 +407,12 @@ main {
 
 .recipe-wrapper {
   margin: 0rem 0rem 5rem 0rem;
+}
+
+.header-recipe-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .recipe-title {
