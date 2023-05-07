@@ -186,7 +186,7 @@ export const recipes = [
   {
     id: 4,
     name: 'Медове печиво з корицею',
-    category: 'Десерт',
+    category: 'Печиво',
     image: './image/pechywo-z-koryceu.jpeg',
     iconInfo: [
       {
@@ -423,7 +423,7 @@ export const recipes = [
   {
     id: 8,
     name: 'Шоколадне печиво',
-    category: 'Десерт',
+    category: 'Печиво',
     image: './image/chokolate-cookies.jpeg',
     iconInfo: [
       {
@@ -620,7 +620,7 @@ export const recipes = [
   {
     id: 12,
     name: 'Сирне Берлінське печиво',
-    category: 'Десерт',
+    category: 'Печиво',
     image: './image/videnske-pechyvo.jpeg',
     iconInfo: [
       {
@@ -667,7 +667,7 @@ export const recipes = [
   {
     id: 13,
     name: 'Пісочне горіхове печиво',
-    category: 'Десерт',
+    category: 'Печиво',
     image: './image/pisochne_gorichove.jpeg',
     iconInfo: [
       {
@@ -748,7 +748,7 @@ export const recipes = [
   {
     id: 15,
     name: 'Вівсяне печиво',
-    category: 'Десерт',
+    category: 'Печиво',
     image: './image/vivsianepechyvo.jpeg',
     iconInfo: [
       {

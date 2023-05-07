@@ -6,7 +6,10 @@ import RecipeList from '../components/RecipeList'
 import Favorite from '../components/Favorite'
 import { recipes } from '../data/data'
 
-const allCategories = ['Всі', ...new Set(recipes.map((item) => item.category))]
+const allCategories = [
+  'Всі',
+  ...new Set(recipes.map((item) => item.category)),
+].sort()
 
 const Dashboard = () => {
   const [menuItem, setMenuItem] = useState(recipes)
