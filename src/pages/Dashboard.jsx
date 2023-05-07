@@ -38,6 +38,7 @@ const Dashboard = () => {
 
   const toggleFavorite = () => {
     setFavoriteOpen(!favoriteOpen)
+    document.body.classList.toggle('no-scroll', favoriteOpen)
     window.scrollTo(0, 0)
   }
   console.log(favorites.map((item) => item.id))
