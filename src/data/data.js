@@ -383,7 +383,7 @@ export const recipes = [
       { ingredient5: '6 шт. яйця курячі' },
       { ingredient6: '250 г. печиво савоярді' },
       {
-        ingredient7: '0-50 г. кон’як (за бажанням))',
+        ingredient7: '30-50 г. кон’як (за бажанням))',
       },
     ],
     description: [
