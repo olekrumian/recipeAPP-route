@@ -826,7 +826,7 @@ export const recipes = [
       },
       {
         image: './icon/difficulty.svg',
-        info: '4/10',
+        info: '2/10',
       },
       {
         image: './icon/person.svg',
