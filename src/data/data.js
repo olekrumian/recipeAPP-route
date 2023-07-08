@@ -860,4 +860,43 @@ export const recipes = [
       },
     ],
   },
+  {
+    id: 17,
+    name: 'Пельменно-вареникове тісто',
+    category: 'Хліб',
+    image: './image/pelmeni-varenyky.jpeg',
+    iconInfo: [
+      {
+        image: './icon/time.svg',
+        info: '00:15 хв.',
+      },
+      {
+        image: './icon/difficulty.svg',
+        info: '1/10',
+      },
+      {
+        image: './icon/person.svg',
+        info: '6 о.',
+      },
+    ],
+    srcIngredient: [
+      { ingredient1: '450 г. борошно' },
+      { ingredient2: '1 ч.л. солі' },
+      {
+        ingredient3: '1 куряче яйце;',
+      },
+      { ingredient4: '185 мл. теплої води' },
+      { ingredient5: '1 ст.л. олії' },
+    ],
+    description: [
+      {
+        step1:
+          'Яйце збити вилочкою, додати воду, сіль і олію, добре перемішати.',
+      },
+      {
+        step2:
+          'До розчинення солі, всипати борошно порціями, вимісити тісто до "гладкості".',
+      },
+    ],
+  },
 ]
