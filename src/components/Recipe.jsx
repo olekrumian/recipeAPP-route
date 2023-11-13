@@ -87,6 +87,7 @@ const Recipe = () => {
                 <ul className="recipe-ingredient-list" key={index}>
                   {srcIngredient.map((item, index) => {
                     const key = Object.keys(item)[0]
+                    console.log(key)
                     const value = item[key]
 
                     return <li key={index}>{value}</li>
