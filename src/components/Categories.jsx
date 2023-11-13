@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 
 export default function Categories({ categories, filterItem }) {
-  const [clickedButton, setClickedButton] = useState(categories[0])
+  const reorderedCategories = [
+    'Всі',
+    ...categories.filter((category) => category !== 'Всі'),
+  ]
+  const [clickedButton, setClickedButton] = useState(reorderedCategories[0])
 
   const handleClick = (category) => {
     filterItem(category)
@@ -10,21 +14,19 @@ export default function Categories({ categories, filterItem }) {
 
   return (
     <div className="btn-category">
-      {categories.map((category, index) => {
-        return (
-          <button
-            key={index}
-            type="button"
-            className={clickedButton === category ? 'btn btn-active' : 'btn'}
-            onClick={() => {
-              filterItem(category)
-              handleClick(category)
-            }}
-          >
-            {category}
-          </button>
-        )
-      })}
+      {reorderedCategories.map((category, index) => (
+        <button
+          key={index}
+          type="button"
+          className={clickedButton === category ? 'btn btn-active' : 'btn'}
+          onClick={() => {
+            filterItem(category)
+            handleClick(category)
+          }}
+        >
+          {category}
+        </button>
+      ))}
     </div>
   )
 }
