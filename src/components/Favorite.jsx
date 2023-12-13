@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Favorite({
   favorites,
@@ -18,7 +18,7 @@ export default function Favorite({
       </button>
       {favorites.map((favorite, index) => (
         <Link key={index} to={`/recipe/${favorite.id}`}>
-          <div className="recipe-item">
+          <div className="recipe-item-favorite">
             <div className="image">
               <img src={favorite.image} alt={favorite.name} />
             </div>
@@ -30,8 +30,8 @@ export default function Favorite({
                 <button
                   className="favorite-btn favorite-btn-delete"
                   onClick={(e) => {
-                    e.preventDefault()
-                    handleAddToFavorites(favorite)
+                    e.preventDefault();
+                    handleAddToFavorites(favorite);
                   }}
                 >
                   <svg
@@ -64,5 +64,5 @@ l-262 263 262 263 c289 290 290 291 233 348 -57 57 -58 56 -348 -233 l-263
         </Link>
       ))}
     </section>
-  )
+  );
 }

@@ -1,37 +1,35 @@
-import { Link, useParams } from 'react-router-dom'
-import { recipes } from '../data/data'
-import back from '../assets/img/backarrov.svg'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import back from '../assets/img/backarrov.svg';
+import { recipes } from '../data/data';
 
 const Recipe = () => {
-  const { recipeId } = useParams()
-  const recipe = recipes.find((recipe) => recipe.id === parseInt(recipeId))
-  const [favorites, setFavorites] = useState([])
+  const { recipeId } = useParams();
+  const recipe = recipes.find((recipe) => recipe.id === parseInt(recipeId));
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-    document.body.classList.remove('no-scroll')
-  }, [])
+    window.scrollTo(0, 0);
+    document.body.classList.remove('no-scroll');
+  }, []);
 
   const handleAddToFavorites = (recipe) => {
     if (!favorites.find((fav) => fav.id === recipe.id)) {
-      setFavorites([...favorites, recipe])
-      localStorage.setItem('favorites', JSON.stringify([...favorites, recipe]))
-      console.log('Added to favorites:', recipe.name)
+      setFavorites([...favorites, recipe]);
+      localStorage.setItem('favorites', JSON.stringify([...favorites, recipe]));
     } else {
-      const updatedFavorites = favorites.filter((fav) => fav.id !== recipe.id)
-      setFavorites(updatedFavorites)
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
-      console.log('Removed from favorites:', recipe.name)
+      const updatedFavorites = favorites.filter((fav) => fav.id !== recipe.id);
+      setFavorites(updatedFavorites);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     }
-  }
+  };
 
   useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites'))
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites'));
     if (storedFavorites) {
-      setFavorites(storedFavorites)
+      setFavorites(storedFavorites);
     }
-  }, [])
+  }, []);
 
   return (
     <>
@@ -43,11 +41,11 @@ const Recipe = () => {
           </Link>
         </div>
         {recipes.map((recipe, index) => {
-          const { image, name, srcIngredient, description } = recipe
+          const { image, name, srcIngredient, description } = recipe;
           if (recipe.id === parseInt(recipeId)) {
             const isFavorite = favorites.some(
               (favorite) => favorite.id === recipe.id
-            )
+            );
 
             return (
               <div className="recipe-wrapper" key={index}>
@@ -64,8 +62,8 @@ const Recipe = () => {
                       isFavorite ? 'favorite-btn-active' : ''
                     }`}
                     onClick={(e) => {
-                      e.preventDefault()
-                      handleAddToFavorites(recipe)
+                      e.preventDefault();
+                      handleAddToFavorites(recipe);
                     }}
                   >
                     <svg
@@ -86,33 +84,32 @@ const Recipe = () => {
                 </div>
                 <ul className="recipe-ingredient-list" key={index}>
                   {srcIngredient.map((item, index) => {
-                    const key = Object.keys(item)[0]
-                    console.log(key)
-                    const value = item[key]
+                    const key = Object.keys(item)[0];
+                    const value = item[key];
 
-                    return <li key={index}>{value}</li>
+                    return <li key={index}>{value}</li>;
                   })}
                 </ul>
 
                 <div className="recipe-description">
                   {description.map((item, index) => {
-                    const key = Object.keys(item)[0]
-                    const value = item[key]
+                    const key = Object.keys(item)[0];
+                    const value = item[key];
 
                     return (
                       <p key={index}>
                         <strong>{index + 1}.</strong> {value}
                       </p>
-                    )
+                    );
                   })}
                 </div>
               </div>
-            )
+            );
           }
         })}
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Recipe
+export default Recipe;

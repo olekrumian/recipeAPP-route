@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import bake from '../assets/img/bake.svg'
+import { Link } from 'react-router-dom';
+import bake from '../assets/img/bake.svg';
 
 export default function RecipeList({
   menuItem,
@@ -7,17 +7,17 @@ export default function RecipeList({
   handleAddToFavorites,
   favorites,
 }) {
-  const sortedMenuItem = menuItem.sort((a, b) => a.name.localeCompare(b.name))
+  const sortedMenuItem = menuItem.sort((a, b) => a.name.localeCompare(b.name));
 
   if (menuItem.length < 1) {
     return (
       <div
         className="error-find"
         onClick={() => {
-          resetList()
+          resetList();
           //TODO - reset input value
           // reset input value
-          document.querySelector('.search-input').value = ''
+          document.querySelector('.search-input').value = '';
         }}
       >
         <h3 className="error-title">
@@ -25,18 +25,22 @@ export default function RecipeList({
         </h3>
         <img className="error-img" src={bake} alt="error" />
       </div>
-    )
+    );
   } else {
     return (
       <section className="recipe-list-wrapper">
         {sortedMenuItem.map((recipe, index) => {
           const isFavorite = favorites.some(
             (favorite) => favorite.id === recipe.id
-          )
+          );
 
           return (
-            <Link key={index} to={`/recipe/${recipe.id}`}>
-              <div key={index} className="recipe-item">
+            <Link
+              className="recipe-item"
+              key={index}
+              to={`/recipe/${recipe.id}`}
+            >
+              <div key={index} className="recipe-item-inner">
                 <div className="image">
                   <img src={recipe.image} alt={recipe.name} />
                 </div>
@@ -48,8 +52,8 @@ export default function RecipeList({
                         isFavorite ? 'favorite-btn-active' : ''
                       }`}
                       onClick={(e) => {
-                        e.preventDefault()
-                        handleAddToFavorites(recipe)
+                        e.preventDefault();
+                        handleAddToFavorites(recipe);
                       }}
                     >
                       <svg
@@ -75,15 +79,15 @@ export default function RecipeList({
                           <img src={item.image} alt="icon" />
                           <span>{item.info}</span>
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 </div>
               </div>
             </Link>
-          )
+          );
         })}
       </section>
-    )
+    );
   }
 }
