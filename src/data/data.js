@@ -62,7 +62,7 @@ export const recipes = [
     iconInfo: [
       {
         image: './icon/time.svg',
-        info: '2г. 30 хв.',
+        info: '2г.30 хв.',
       },
       {
         image: './icon/difficulty.svg',
@@ -115,7 +115,7 @@ export const recipes = [
     iconInfo: [
       {
         image: './icon/time.svg',
-        info: '1г. 30 хв.',
+        info: '1г.30 хв.',
       },
       {
         image: './icon/difficulty.svg',
@@ -721,11 +721,11 @@ export const recipes = [
     id: 15,
     name: 'Вівсяне печиво',
     category: 'Печиво',
-    image: './image/vivsianepechyvo.jpeg',
+    image: './image/vivsianepechyvo.jpg',
     iconInfo: [
       {
         image: './icon/time.svg',
-        info: '00:50 хв.',
+        info: '50 хв.',
       },
       {
         image: './icon/difficulty.svg',
@@ -766,7 +766,7 @@ export const recipes = [
     iconInfo: [
       {
         image: './icon/time.svg',
-        info: '00:40 хв.',
+        info: '40 хв.',
       },
       {
         image: './icon/difficulty.svg',
@@ -809,7 +809,7 @@ export const recipes = [
     iconInfo: [
       {
         image: './icon/time.svg',
-        info: '00:15 хв.',
+        info: '15 хв.',
       },
       {
         image: './icon/difficulty.svg',
@@ -953,7 +953,7 @@ export const recipes = [
     iconInfo: [
       {
         image: './icon/time.svg',
-        info: '8г. 0 хв.',
+        info: '8г.',
       },
       {
         image: './icon/difficulty.svg',
@@ -1017,7 +1017,7 @@ export const recipes = [
     iconInfo: [
       {
         image: './icon/time.svg',
-        info: '1г. 0 хв.',
+        info: '1г.',
       },
       {
         image: './icon/difficulty.svg',
@@ -1070,6 +1070,90 @@ export const recipes = [
       },
       {
         step: 'Відправляємо торт до холодильника на 4 години, а краще на ніч.',
+      },
+    ],
+  },
+  {
+    id: 22,
+    name: 'Гофри',
+    category: 'Десерт',
+    image: './image/gofry.webp',
+    iconInfo: [
+      {
+        image: './icon/time.svg',
+        info: '30 хв.',
+      },
+      {
+        image: './icon/difficulty.svg',
+        info: '5/10',
+      },
+      {
+        image: './icon/person.svg',
+        info: '4 о.',
+      },
+    ],
+    srcIngredient: [
+      { ingredient: '100 мл. рослинної олії' },
+      { ingredient: '280 мл. Молока' },
+      {
+        ingredient: '15-40 г. цукру',
+      },
+      { ingredient: '300 г. борошна' },
+      { ingredient: '2 шт. яйця' },
+      { ingredient: '10 г. розпушувача' },
+      { ingredient: 'Щіпка солі' },
+    ],
+    description: [
+      {
+        step: 'Яйця збиваємо вінчиком до повітряної піни. Не перестаючи збивати, додаємо інші інгредієнти.',
+      },
+      {
+        step: 'Для кращого ефекту заздалегідь змішайте борошно і розпушувач.',
+      },
+      {
+        step: 'Перемішуємо суміш до однорідності та випікаємо вафлі 3,5 - 4 хвилини в добре розігрітій вафельниці.',
+      },
+    ],
+  },
+  {
+    id: 23,
+    name: 'Кекси 12 ложок',
+    category: 'Десерт',
+    image: './image/keksyFast.webp',
+    iconInfo: [
+      {
+        image: './icon/time.svg',
+        info: '30 хв.',
+      },
+      {
+        image: './icon/difficulty.svg',
+        info: '5/10',
+      },
+      {
+        image: './icon/person.svg',
+        info: '4 о.',
+      },
+    ],
+    srcIngredient: [
+      { ingredient: '12 ст.л. молока' },
+      { ingredient: '12 ст.л. рослинної олії' },
+      {
+        ingredient: '12 ст.л. цукру',
+      },
+      {
+        ingredient: '12 ст.л. борошна',
+      },
+      { ingredient: 'Ваніль' },
+      { ingredient: '3 шт. яйця' },
+      { ingredient: '7 г. розпушувача' },
+      { ingredient: 'Щіпка солі' },
+    ],
+    description: [
+      {
+        step: 'Яйця збиваємо із сіллю, цукром і ваніллю. Додаємо молоко та масло. Борошно та розпушувач.',
+      },
+      {
+        step: 'Випікаємо при 180°С до готовності хвилин 30-40 хв.',
       },
     ],
   },
