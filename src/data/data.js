@@ -1297,8 +1297,6 @@ export const recipes = [
       },
     ],
     srcIngredient: [
-      { ingredient: '____Тісто____' },
-
       { ingredient: '550 г. борошно' },
       { ingredient: '80 г. вершкове масло' },
       { ingredient: '1 шт. середнє яйце + 1 білок' },
