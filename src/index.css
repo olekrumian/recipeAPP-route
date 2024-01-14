@@ -319,10 +319,8 @@ main {
   position: relative;
   width: 100%;
   height: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
 }
 
