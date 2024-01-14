@@ -1243,7 +1243,7 @@ export const recipes = [
       { ingredient: '1 шт. яйце' },
       { ingredient: '0,5 ч. л. сіль' },
       { ingredient: '+- 0,5 склянки холодної води' },
-      { ingredient: 'Начинка' },
+      { ingredient: '____Начинка____' },
       { ingredient: '500 г. гриби' },
       { ingredient: '1 шт. цибуля' },
       { ingredient: '500г. куряче філе' },
