@@ -318,9 +318,10 @@ main {
 .recipe-list-wrapper {
   position: relative;
   width: 100%;
+  max-width: 910px;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(3, auto);
   gap: 1.6rem;
 }
 
