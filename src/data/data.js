@@ -1339,7 +1339,7 @@ export const recipes = [
   {
     id: 27,
     name: 'Морквяне печиво',
-    category: 'Десерт',
+    category: 'Печиво',
     image: './image/morkwiane_pechyvo.jpg',
     iconInfo: [
       {
