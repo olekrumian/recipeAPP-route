@@ -1479,4 +1479,46 @@ export const recipes = [
       { step: 'Перемазуємо коржі.' },
     ],
   },
+  {
+    id: 30,
+    name: 'Рибний суп',
+    category: 'Обід',
+    image: './image/rybny_sup.webp',
+    iconInfo: [
+      {
+        image: './icon/time.svg',
+        info: '1г.',
+      },
+      {
+        image: './icon/difficulty.svg',
+        info: '4/10',
+      },
+      {
+        image: './icon/person.svg',
+        info: '4 о.',
+      },
+    ],
+    srcIngredient: [
+      { ingredient: '300 г. філе червоної риби' },
+      { ingredient: '5-7 шт. картопля' },
+      { ingredient: '1 шт. цибуля' },
+      { ingredient: '1 шт. морква' },
+      { ingredient: '150 г. броколі' },
+      { ingredient: '150 г. помідори черрі' },
+      { ingredient: '150 мл. вершки 15-20%' },
+      { ingredient: '1 ст. л. сир кисломолочний' },
+      { ingredient: 'Сіль' },
+      { ingredient: 'Чорний перець' },
+      { ingredient: 'Петрушка' },
+      { ingredient: '2-2.5 л. вода' },
+    ],
+    description: [
+      {
+        step: 'Обсмажуємо цибулю з морквою. Додаємо картоплю та воду, підсолюємо.',
+      },
+      { step: 'Після готовності картоплі, додаємо броколі, та рибу.' },
+      { step: 'Додаємо помідори, вершки та сир.' },
+      { step: 'Петрушка та перець.' },
+    ],
+  },
 ];
