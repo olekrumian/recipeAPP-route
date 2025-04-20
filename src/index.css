@@ -496,7 +496,7 @@ main {
   margin: 1rem 0rem 1rem 0rem;
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   flex-direction: row;
 }
 
@@ -946,7 +946,7 @@ main {
     margin: 1rem 0rem 1rem 0rem;
     width: 100%;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     flex-direction: row;
   }
 

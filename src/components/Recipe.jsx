@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import back from '../assets/img/backarrov.svg';
+import shareIcon from '../assets/img/icons8-share.svg';
 import { recipes } from '../data/data';
 
 const Recipe = () => {
   const { recipeId } = useParams();
+  const location = useLocation();
   const recipe = recipes.find((recipe) => recipe.id === parseInt(recipeId));
   const [favorites, setFavorites] = useState([]);
 
@@ -31,6 +33,20 @@ const Recipe = () => {
     }
   }, []);
 
+  // Додаємо функцію для share
+  const handleShare = () => {
+    const shareUrl = `${window.location.origin}${location.pathname}`;
+    if (navigator.share) {
+      navigator.share({
+        title: recipe?.name || 'Рецепт',
+        url: shareUrl,
+      });
+    } else {
+      navigator.clipboard.writeText(shareUrl);
+      alert('Посилання скопійовано!');
+    }
+  };
+
   return (
     <>
       <section className="container day-theme" key={recipeId}>
@@ -39,6 +55,15 @@ const Recipe = () => {
             <img src={back} alt="" />
             <span>Назад</span>
           </Link>
+          <img
+            className="logo"
+            src={shareIcon}
+            alt="share"
+            width={24}
+            height={24}
+            style={{ cursor: 'pointer', minWidth: 24, minHeight: 24 }}
+            onClick={handleShare}
+          />
         </div>
         {recipes.map((recipe, index) => {
           const { image, name, srcIngredient, description } = recipe;
