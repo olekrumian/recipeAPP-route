@@ -91,13 +91,6 @@ const Recipe = () => {
       return path.replace('./', '/');
     }
     // Якщо це відносний шлях для зображень рецептів
-    if (path.includes('./image/')) {
-      return path.replace('./', '/');
-    }
-    // Якщо це просто назва файлу, додаємо шлях
-    if (!path.includes('./') && !path.includes('http')) {
-      return `/image/${path}`;
-    }
     return path;
   };
 

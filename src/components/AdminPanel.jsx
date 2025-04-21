@@ -10,6 +10,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../firebase/authService';
 import { recipeService } from '../firebase/recipeService';
+import './AdminPanel.css';
 
 const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
@@ -56,7 +57,6 @@ const AdminPanel = () => {
     name: 'description',
   });
 
-  // Load recipes
   useEffect(() => {
     const loadRecipes = async () => {
       try {
@@ -80,10 +80,8 @@ const AdminPanel = () => {
 
   const handleDeleteRecipe = async (recipeId) => {
     try {
-      // Отримуємо дані рецепта перед видаленням
       const recipeToDelete = recipes.find((recipe) => recipe.id === recipeId);
 
-      // Видаляємо зображення з Firebase Storage, якщо це посилання на Storage
       if (
         recipeToDelete &&
         recipeToDelete.image &&
@@ -97,15 +95,12 @@ const AdminPanel = () => {
           await deleteObject(imageRef);
         } catch (storageError) {
           console.error('Error deleting image from storage:', storageError);
-          // Продовжуємо видалення рецепта, навіть якщо видалення зображення не вдалося
         }
       }
 
-      // Видаляємо рецепт з бази даних
       await recipeService.deleteRecipe(recipeId);
       setRecipes(recipes.filter((recipe) => recipe.id !== recipeId));
 
-      // Видаляємо рецепт з обраних
       const storedFavorites = localStorage.getItem('favorites');
       if (storedFavorites) {
         const favorites = JSON.parse(storedFavorites);
@@ -150,7 +145,7 @@ const AdminPanel = () => {
       };
 
       await recipeService.addRecipe(recipeData);
-      setRecipes([...recipes, recipeData]); // Оновлюємо локальний стан
+      setRecipes([...recipes, recipeData]);
       setMessage('Рецепт успішно додано!');
       reset();
     } catch (error) {
@@ -161,310 +156,223 @@ const AdminPanel = () => {
     }
   };
 
-  const formClasses =
-    'w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none';
-  const inputClasses =
-    'w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 appearance-none';
-
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-6 flex flex-col justify-center sm:py-12">
-      <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-        <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
-          <div className="max-w-md mx-auto">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold text-gray-900">
-                Додати новий рецепт
-              </h2>
-              <button
-                onClick={handleLogout}
-                className="px-6 py-3 text-lg bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors shadow-md active:transform active:scale-95"
-              >
-                Вийти
-              </button>
-            </div>
-
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="divide-y divide-gray-200"
-            >
-              <div className="py-8 space-y-6">
-                {/* Назва рецепта */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Назва рецепта:
-                  </label>
-                  <input
-                    {...register('name', { required: "Назва обов'язкова" })}
-                    className={inputClasses}
-                  />
-                  {errors.name && (
-                    <span className="text-sm text-red-500">
-                      {errors.name.message}
-                    </span>
-                  )}
-                </div>
-
-                {/* Категорія */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Категорія:
-                  </label>
-                  <select
-                    {...register('category', {
-                      required: "Категорія обов'язкова",
-                    })}
-                    className={formClasses}
-                  >
-                    <option value="">Виберіть категорію</option>
-                    <option value="Обід">Обід</option>
-                    <option value="Десерт">Десерт</option>
-                    <option value="Печиво">Печиво</option>
-                    <option value="Хліб">Хліб</option>
-                    <option value="Вечеря">Вечеря</option>
-                    <option value="Додатки">Додатки</option>
-                  </select>
-                  {errors.category && (
-                    <span className="text-sm text-red-500">
-                      {errors.category.message}
-                    </span>
-                  )}
-                </div>
-
-                {/* Зображення */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Зображення:
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    {...register('image', {
-                      required: "Зображення обов'язкове",
-                    })}
-                    className={`${inputClasses} file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100`}
-                  />
-                  {errors.image && (
-                    <span className="text-sm text-red-500">
-                      {errors.image.message}
-                    </span>
-                  )}
-                </div>
-
-                {/* Інформація про рецепт */}
-                <div className="space-y-4">
-                  <label className="text-sm font-medium text-gray-700">
-                    Інформація про рецепт:
-                  </label>
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                    <div>
-                      <label className="text-xs text-gray-500">
-                        Час приготування:
-                      </label>
-                      <input
-                        {...register('iconInfo.0.info', {
-                          required: "Час обов'язковий",
-                        })}
-                        placeholder="1г. 30хв."
-                        className={inputClasses}
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs text-gray-500">
-                        Складність:
-                      </label>
-                      <input
-                        {...register('iconInfo.1.info', {
-                          required: "Складність обов'язкова",
-                        })}
-                        placeholder="5/10"
-                        className={inputClasses}
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs text-gray-500">
-                        Кількість порцій:
-                      </label>
-                      <input
-                        {...register('iconInfo.2.info', {
-                          required: "Кількість порцій обов'язкова",
-                        })}
-                        placeholder="4 о."
-                        className={inputClasses}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Інгредієнти */}
-                <div className="space-y-4">
-                  <label className="text-sm font-medium text-gray-700">
-                    Інгредієнти:
-                  </label>
-                  {ingredientFields.map((field, index) => (
-                    <div key={field.id} className="flex gap-2">
-                      <input
-                        {...register(`srcIngredient.${index}.ingredient`, {
-                          required: "Інгредієнт обов'язковий",
-                        })}
-                        placeholder="Інгредієнт"
-                        className={inputClasses}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => removeIngredient(index)}
-                        className="px-4 py-3 text-lg text-white bg-red-500 rounded-lg hover:bg-red-600 shadow-md active:transform active:scale-95 min-w-[120px]"
-                      >
-                        Видалити
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() => appendIngredient({ ingredient: '' })}
-                    className="w-full px-6 py-4 text-lg text-white bg-blue-500 rounded-lg hover:bg-blue-600 shadow-md active:transform active:scale-95"
-                  >
-                    Додати інгредієнт
-                  </button>
-                </div>
-
-                {/* Кроки приготування */}
-                <div className="space-y-4">
-                  <label className="text-sm font-medium text-gray-700">
-                    Кроки приготування:
-                  </label>
-                  {descriptionFields.map((field, index) => (
-                    <div key={field.id} className="flex gap-2">
-                      <textarea
-                        {...register(`description.${index}.step`, {
-                          required: "Крок обов'язковий",
-                        })}
-                        placeholder="Опис кроку"
-                        className={`${formClasses} min-h-[100px]`}
-                        rows="3"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => removeDescription(index)}
-                        className="px-4 py-3 text-lg text-white bg-red-500 rounded-lg hover:bg-red-600 shadow-md active:transform active:scale-95 min-w-[120px]"
-                      >
-                        Видалити
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() => appendDescription({ step: '' })}
-                    className="w-full px-6 py-4 text-lg text-white bg-blue-500 rounded-lg hover:bg-blue-600 shadow-md active:transform active:scale-95"
-                  >
-                    Додати крок
-                  </button>
-                </div>
-              </div>
-
-              {/* Кнопка збереження */}
-              <div className="pt-6">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full px-6 py-4 text-lg font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 disabled:bg-gray-400 shadow-md active:transform active:scale-95"
-                >
-                  {loading ? 'Збереження...' : 'Зберегти рецепт'}
-                </button>
-              </div>
-            </form>
-          </div>
+    <div className="admin-container">
+      <div className="admin-content">
+        <div className="admin-header">
+          <h2 className="admin-title">Додати новий рецепт</h2>
+          <button onClick={handleLogout} className="logout-button">
+            Вийти
+          </button>
         </div>
 
-        {/* Таблиця рецептів */}
-        <div className="mt-8 bg-white shadow rounded-lg overflow-hidden">
-          <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Список рецептів
-            </h3>
+        <form onSubmit={handleSubmit(onSubmit)} className="form-container">
+          <div className="form-group">
+            <label className="form-label">Назва рецепта:</label>
+            <input
+              {...register('name', { required: "Назва обов'язкова" })}
+              className="form-input"
+            />
+            {errors.name && (
+              <span className="error-message">{errors.name.message}</span>
+            )}
           </div>
-          <div className="border-t border-gray-200">
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      ID
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Назва
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Категорія
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Дії
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {recipes.map((recipe) => (
-                    <tr key={recipe.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {recipe.id}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {recipe.name}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {recipe.category}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+
+          <div className="form-group">
+            <label className="form-label">Категорія:</label>
+            <select
+              {...register('category', { required: "Категорія обов'язкова" })}
+              className="form-select"
+            >
+              <option value="">Виберіть категорію</option>
+              <option value="Обід">Обід</option>
+              <option value="Десерт">Десерт</option>
+              <option value="Печиво">Печиво</option>
+              <option value="Хліб">Хліб</option>
+              <option value="Вечеря">Вечеря</option>
+              <option value="Додатки">Додатки</option>
+            </select>
+            {errors.category && (
+              <span className="error-message">{errors.category.message}</span>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Зображення:</label>
+            <input
+              type="file"
+              accept="image/*"
+              {...register('image', { required: "Зображення обов'язкове" })}
+              className="form-input"
+            />
+            {errors.image && (
+              <span className="error-message">{errors.image.message}</span>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Інформація про рецепт:</label>
+            <div className="recipe-info-grid">
+              <div>
+                <label className="form-label">Час приготування:</label>
+                <input
+                  {...register('iconInfo.0.info', {
+                    required: "Час обов'язковий",
+                  })}
+                  placeholder="1г. 30хв."
+                  className="form-input"
+                />
+              </div>
+              <div>
+                <label className="form-label">Складність:</label>
+                <input
+                  {...register('iconInfo.1.info', {
+                    required: "Складність обов'язкова",
+                  })}
+                  placeholder="5/10"
+                  className="form-input"
+                />
+              </div>
+              <div>
+                <label className="form-label">Кількість порцій:</label>
+                <input
+                  {...register('iconInfo.2.info', {
+                    required: "Кількість порцій обов'язкова",
+                  })}
+                  placeholder="4 о."
+                  className="form-input"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Інгредієнти:</label>
+            <div className="ingredient-list">
+              {ingredientFields.map((field, index) => (
+                <div key={field.id} className="ingredient-item">
+                  <input
+                    {...register(`srcIngredient.${index}.ingredient`, {
+                      required: "Інгредієнт обов'язковий",
+                    })}
+                    placeholder="Інгредієнт"
+                    className="form-input"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeIngredient(index)}
+                    className="button button-danger"
+                  >
+                    Видалити
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => appendIngredient({ ingredient: '' })}
+                className="button button-primary button-full"
+              >
+                Додати інгредієнт
+              </button>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Кроки приготування:</label>
+            <div className="step-list">
+              {descriptionFields.map((field, index) => (
+                <div key={field.id} className="step-item">
+                  <textarea
+                    {...register(`description.${index}.step`, {
+                      required: "Крок обов'язковий",
+                    })}
+                    placeholder="Опис кроку"
+                    className="form-textarea"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeDescription(index)}
+                    className="button button-danger"
+                  >
+                    Видалити
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => appendDescription({ step: '' })}
+                className="button button-primary button-full"
+              >
+                Додати крок
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="button button-success button-full"
+          >
+            {loading ? 'Збереження...' : 'Зберегти рецепт'}
+          </button>
+        </form>
+
+        <div className="table-container">
+          <div className="table-header">
+            <h3 className="table-title">Список рецептів</h3>
+          </div>
+          <div className="table-wrapper">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Назва</th>
+                  <th>Дії</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recipes.map((recipe) => (
+                  <tr key={recipe.id}>
+                    <td>{recipe.id}</td>
+                    <td>{recipe.name}</td>
+                    <td>
+                      <div className="actions">
                         {deleteConfirm === recipe.id ? (
-                          <div className="flex justify-end gap-2">
+                          <>
                             <button
                               onClick={() => handleDeleteRecipe(recipe.id)}
-                              className="text-white hover:bg-green-600 bg-green-500 px-3 py-1 rounded"
+                              className="button button-success"
                             >
                               Підтвердити
                             </button>
                             <button
                               onClick={() => setDeleteConfirm(null)}
-                              className="text-white hover:bg-red-600 bg-red-500 px-3 py-1 rounded"
+                              className="button button-danger"
                             >
                               Скасувати
                             </button>
-                          </div>
+                          </>
                         ) : (
                           <button
                             onClick={() => setDeleteConfirm(recipe.id)}
-                            className="text-white bg-red-500 hover:bg-red-600 px-3 py-1 rounded transition-colors"
+                            className="button button-danger"
                           >
                             Видалити
                           </button>
                         )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
-        {/* Повідомлення про результат */}
         {message && (
           <div
-            className={`mt-4 p-4 rounded-md ${
-              message.includes('успішно')
-                ? 'bg-green-100 text-green-700'
-                : 'bg-red-100 text-red-700'
+            className={`message ${
+              message.includes('успішно') ? 'message-success' : 'message-error'
             }`}
           >
             {message}

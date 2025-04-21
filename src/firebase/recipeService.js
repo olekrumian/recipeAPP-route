@@ -18,14 +18,12 @@ export const recipeService = {
       return {
         ...data,
         id: parseInt(doc.id, 10),
-        image: data.image.startsWith('./')
-          ? data.image
-          : `./image/${data.image}`,
+        image: data.image, // Прибираємо модифікацію шляху
         iconInfo: data.iconInfo.map((icon) => ({
           ...icon,
           image: icon.image.startsWith('./')
-            ? icon.image
-            : `./icon/${icon.image}`,
+            ? icon.image.replace('./', '/')
+            : icon.image,
         })),
       };
     });

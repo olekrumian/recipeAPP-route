@@ -12,18 +12,15 @@ export default function RecipeList({
 
   const getImagePath = (path) => {
     if (!path) return '';
+    // Якщо це повний URL (Firebase Storage)
     if (path.startsWith('http')) {
       return path;
     }
+    // Якщо це відносний шлях для іконок
     if (path.includes('./icon/')) {
       return path.replace('./', '/');
     }
-    if (path.includes('./image/')) {
-      return path.replace('./', '/');
-    }
-    if (!path.includes('./') && !path.includes('http')) {
-      return `/image/${path}`;
-    }
+    // Якщо це відносний шлях для зображень рецептів
     return path;
   };
 
