@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [menuItem, setMenuItem] = useState([]);
   const [categories, setCategories] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [favoriteOpen, setFavoriteOpen] = useState(true);
+  const [favoriteOpen, setFavoriteOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // Завантаження рецептів один раз при монтуванні

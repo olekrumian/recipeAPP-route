@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import back from '../assets/img/backarrov.svg';
 import bake from '../assets/img/bake.svg';
 import { recipeService } from '../firebase/recipeService';
@@ -7,6 +7,7 @@ import { recipeService } from '../firebase/recipeService';
 const Recipe = () => {
   const { recipeId } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
@@ -110,10 +111,20 @@ const Recipe = () => {
     <>
       <section className="container day-theme">
         <div className="header-menu-wrapper">
-          <Link className="to-back" to="/">
+          <button
+            className="to-back"
+            onClick={() => navigate(-1)}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              cursor: 'pointer',
+            }}
+          >
             <img src={back} alt="" />
             <span>Назад</span>
-          </Link>
+          </button>
           <button
             onClick={handleShare}
             style={{
