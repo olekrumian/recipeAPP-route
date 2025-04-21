@@ -9,14 +9,17 @@ export default function RecipeList({
 }) {
   const sortedMenuItem = menuItem.sort((a, b) => a.name.localeCompare(b.name));
 
+  const getImagePath = (path) => {
+    if (!path) return '';
+    return path.replace('./', '/');
+  };
+
   if (menuItem.length < 1) {
     return (
       <div
         className="error-find"
         onClick={() => {
           resetList();
-          //TODO - reset input value
-          // reset input value
           document.querySelector('.search-input').value = '';
         }}
       >
@@ -42,7 +45,7 @@ export default function RecipeList({
             >
               <div key={index} className="recipe-item-inner">
                 <div className="image">
-                  <img src={recipe.image} alt={recipe.name} />
+                  <img src={getImagePath(recipe.image)} alt={recipe.name} />
                 </div>
                 <div className="description">
                   <div className="description-title-wrapper">
@@ -76,7 +79,7 @@ export default function RecipeList({
                     {recipe.iconInfo.map((item, id) => {
                       return (
                         <div key={id} className="info-item time">
-                          <img src={item.image} alt="icon" />
+                          <img src={getImagePath(item.image)} alt="icon" />
                           <span>{item.info}</span>
                         </div>
                       );

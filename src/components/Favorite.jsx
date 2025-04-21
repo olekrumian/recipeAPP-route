@@ -7,6 +7,11 @@ export default function Favorite({
   toggleFavorite,
   handleAddToFavorites,
 }) {
+  const getImagePath = (path) => {
+    if (!path) return '';
+    return path.replace('./', '/');
+  };
+
   return (
     <section
       className={`favorite-container ${
@@ -20,7 +25,7 @@ export default function Favorite({
         <Link key={index} to={`/recipe/${favorite.id}`}>
           <div className="recipe-item-favorite">
             <div className="image">
-              <img src={favorite.image} alt={favorite.name} />
+              <img src={getImagePath(favorite.image)} alt={favorite.name} />
             </div>
             <div className="description favorite-description">
               <div className="description-title-wrapper">

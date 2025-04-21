@@ -1,67 +1,106 @@
-import React, { useEffect, useState } from 'react';
-// Components
+import React, { useCallback, useEffect, useState } from 'react';
 import Categories from '../components/Categories';
 import Favorite from '../components/Favorite';
 import Header from '../components/Header';
 import RecipeList from '../components/RecipeList';
-import { recipes } from '../data/data';
-
-const allCategories = [
-  'Всі',
-  ...new Set(recipes.map((item) => item.category)),
-].sort();
+import { recipeService } from '../firebase/recipeService';
 
 const Dashboard = () => {
-  const [menuItem, setMenuItem] = useState(recipes);
-  const [categories, setCategories] = useState(allCategories);
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [menuItem, setMenuItem] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [favoriteOpen, setFavoriteOpen] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  //*Reset list
-  const resetList = () => {
-    setMenuItem(recipes);
-  };
-
-  //*Filter by category
-  const filterItem = (category) => {
-    if (category === 'Всі') {
-      return setMenuItem(recipes);
-    }
-    const newItem = recipes.filter((item) => item.category === category);
-    setMenuItem(newItem);
-  };
-  //*Find recipe
-  const searchRecipe = (e) => {
-    const result = recipes.filter((item) =>
-      item.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-
-    return setMenuItem(result);
-  };
-
-  const toggleFavorite = () => {
-    setFavoriteOpen(!favoriteOpen);
-    document.body.classList.toggle('no-scroll', favoriteOpen);
-    window.scrollTo(0, 0);
-  };
-
-  const handleAddToFavorites = (recipe) => {
-    if (!favorites.find((fav) => fav.id === recipe.id)) {
-      setFavorites([...favorites, recipe]);
-      localStorage.setItem('favorites', JSON.stringify([...favorites, recipe]));
-    } else {
-      const updatedFavorites = favorites.filter((fav) => fav.id !== recipe.id);
-      setFavorites(updatedFavorites);
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    }
-  };
-
+  // Завантаження рецептів один раз при монтуванні
   useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+    const loadRecipes = async () => {
+      try {
+        setLoading(true);
+        const recipes = await recipeService.getAllRecipes();
+        setAllRecipes(recipes);
+        setMenuItem(recipes);
+        const allCategories = [
+          'Всі',
+          ...new Set(recipes.map((item) => item.category)),
+        ].sort();
+        setCategories(allCategories);
+      } catch (error) {
+        console.error('Error loading recipes:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadRecipes();
+  }, []);
+
+  // Завантаження збережених улюблених рецептів
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem('favorites');
     if (storedFavorites) {
-      setFavorites(storedFavorites);
+      try {
+        setFavorites(JSON.parse(storedFavorites));
+      } catch (error) {
+        console.error('Error parsing favorites:', error);
+        localStorage.removeItem('favorites');
+      }
     }
   }, []);
+
+  const resetList = useCallback(() => {
+    setMenuItem(allRecipes);
+  }, [allRecipes]);
+
+  const filterItem = useCallback(
+    (category) => {
+      if (category === 'Всі') {
+        resetList();
+      } else {
+        const newItem = allRecipes.filter((item) => item.category === category);
+        setMenuItem(newItem);
+      }
+    },
+    [allRecipes, resetList]
+  );
+
+  const searchRecipe = useCallback(
+    (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const result = allRecipes.filter((item) =>
+        item.name.toLowerCase().includes(searchTerm)
+      );
+      setMenuItem(result);
+    },
+    [allRecipes]
+  );
+
+  const toggleFavorite = useCallback(() => {
+    setFavoriteOpen(!favoriteOpen);
+    document.body.classList.toggle('no-scroll', !favoriteOpen);
+    window.scrollTo(0, 0);
+  }, [favoriteOpen]);
+
+  const handleAddToFavorites = useCallback((recipe) => {
+    setFavorites((prevFavorites) => {
+      const recipeExists = prevFavorites.some((fav) => fav.id === recipe.id);
+      let newFavorites;
+
+      if (recipeExists) {
+        newFavorites = prevFavorites.filter((fav) => fav.id !== recipe.id);
+      } else {
+        newFavorites = [...prevFavorites, recipe];
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      return newFavorites;
+    });
+  }, []);
+
+  if (loading) {
+    return <div className="loader">Loading...</div>;
+  }
 
   return (
     <>
