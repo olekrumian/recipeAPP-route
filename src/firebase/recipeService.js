@@ -19,10 +19,10 @@ export const recipeService = {
         ...data,
         id: parseInt(doc.id, 10),
         image: './image/' + data.image,
-        iconInfo: data.iconInfo.map(icon => ({
+        iconInfo: data.iconInfo.map((icon) => ({
           ...icon,
-          image: './icon/' + icon.image
-        }))
+          image: './icon/' + icon.image,
+        })),
       };
     });
   },
