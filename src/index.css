@@ -458,11 +458,6 @@ input[type="file"] {
   color: var(--font-color);
   box-shadow: var(--shadow);
   border: var(--border);
-  transition: transform 0.3s ease;
-}
-
-.recipe-item-inner:hover {
-  transform: translateY(-5px);
 }
 
 .image {
