@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import bake from '../assets/img/bake.svg';
 
 export default function RecipeList({
@@ -8,25 +8,43 @@ export default function RecipeList({
   handleAddToFavorites,
   favorites,
 }) {
+  const location = useLocation();
+
   const getImagePath = (path) => {
     if (!path) return '';
-    // Якщо це повний URL (Firebase Storage)
     if (path.startsWith('http')) {
       return path;
     }
-    // Якщо це відносний шлях для іконок
     if (path.includes('./icon/')) {
       return path.replace('./', '/');
     }
-    // Якщо це відносний шлях для зображень рецептів
     if (path.includes('./image/')) {
       return path.replace('./', '/');
     }
-    // Якщо це просто назва файлу, додаємо шлях
     if (!path.includes('./') && !path.includes('http')) {
       return `/image/${path}`;
     }
     return path;
+  };
+
+  const handleShare = (e, recipe) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const url = `${window.location.origin}/recipe/${recipe.id}`;
+    if (navigator.share) {
+      navigator.share({
+        title: recipe.name,
+        text: `Перевір цей чудовий рецепт: ${recipe.name}\n${url}`,
+        url: url,
+      });
+    } else {
+      navigator.clipboard
+        .writeText(`Перевір цей чудовий рецепт: ${recipe.name}\n${url}`)
+        .then(() => {
+          alert('Посилання скопійовано в буфер обміну!');
+        });
+    }
   };
 
   if (!menuItem || menuItem.length === 0) {
@@ -62,34 +80,52 @@ export default function RecipeList({
               <div className="description">
                 <div className="description-title-wrapper">
                   <h3 className="description-title">{recipe.name}</h3>
-                  <button
-                    className={`favorite-btn ${
-                      favorites.some(
-                        (fav) => String(fav.id) === String(recipe.id)
-                      )
-                        ? 'favorite-btn-active'
-                        : ''
-                    }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleAddToFavorites(recipe);
-                    }}
-                  >
-                    <svg
-                      width="25"
-                      height="23"
-                      viewBox="0 0 25 23"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                  <div className="recipe-actions">
+                    <button
+                      onClick={(e) => handleShare(e, recipe)}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        marginRight: '10px',
+                        cursor: 'pointer',
+                      }}
                     >
-                      <path
-                        d="M12.5 1.85081C19.6875 -4.77919 36.875 7.22081 12.5 21.8508C-11.875 7.22081 5.3125 -4.77919 12.5 1.85081Z"
-                        stroke="#112D4E"
-                        strokeWidth="2"
-                        strokeLinejoin="round"
+                      <img
+                        src="/icon/share.svg"
+                        alt="Share"
+                        width="24"
+                        height="24"
                       />
-                    </svg>
-                  </button>
+                    </button>
+                    <button
+                      className={`favorite-btn ${
+                        favorites.some(
+                          (fav) => String(fav.id) === String(recipe.id)
+                        )
+                          ? 'favorite-btn-active'
+                          : ''
+                      }`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleAddToFavorites(recipe);
+                      }}
+                    >
+                      <svg
+                        width="25"
+                        height="23"
+                        viewBox="0 -1 25 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12.5 1.85081C19.6875 -4.77919 36.875 7.22081 12.5 21.8508C-11.875 7.22081 5.3125 -4.77919 12.5 1.85081Z"
+                          stroke="#112D4E"
+                          strokeWidth="2"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
                 <div className="description-info">
                   {recipe.iconInfo.map((item, id) => {

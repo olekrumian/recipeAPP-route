@@ -392,13 +392,9 @@ main {
 .favorite-btn {
   border: none;
   background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.favorite-btn-active>svg,
-.favorite-btn-active>svg>path {
+.favorite-btn-active>svg path {
   fill: rgb(255, 172, 172);
   stroke: rgb(255, 172, 172);
 }
@@ -528,6 +524,15 @@ main {
   font-weight: 300;
   font-size: 1.6rem;
   color: var(--font-color);
+}
+
+.recipe-actions {
+  display: flex;
+  align-items: center;
+}
+
+.recipe-actions img:hover {
+  opacity: 0.7;
 }
 
 .header-menu-wrapper {
@@ -874,15 +879,13 @@ main {
   }
 
   .favorite-btn {
+    width: 25px;
+    height: 23px;
     border: none;
     background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
-  .favorite-btn-active>svg,
-  .favorite-btn-active>svg>path {
+  .favorite-btn-active>svg path {
     fill: rgb(255, 172, 172);
     stroke: rgb(255, 172, 172);
   }

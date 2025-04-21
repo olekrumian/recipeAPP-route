@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import back from '../assets/img/backarrov.svg';
 import bake from '../assets/img/bake.svg';
-import shareIcon from '../assets/img/icons8-share.svg';
 import { recipeService } from '../firebase/recipeService';
 
 const Recipe = () => {
@@ -68,12 +67,16 @@ const Recipe = () => {
     const shareUrl = `${window.location.origin}${location.pathname}`;
     if (navigator.share) {
       navigator.share({
-        title: recipe?.name || 'Рецепт',
+        title: recipe.name,
+        text: `Перевір цей чудовий рецепт: ${recipe.name}\n${shareUrl}`,
         url: shareUrl,
       });
     } else {
-      navigator.clipboard.writeText(shareUrl);
-      alert('Посилання скопійовано!');
+      navigator.clipboard
+        .writeText(`Перевір цей чудовий рецепт: ${recipe.name}\n${shareUrl}`)
+        .then(() => {
+          alert('Посилання скопійовано в буфер обміну!');
+        });
     }
   };
 
@@ -123,20 +126,16 @@ const Recipe = () => {
             <img src={back} alt="" />
             <span>Назад</span>
           </Link>
-          <img
-            className="logo"
-            src={shareIcon}
-            alt="share"
-            width={24}
-            height={24}
-            style={{
-              cursor: 'pointer',
-              minWidth: 24,
-              minHeight: 24,
-              color: '#112d4e',
-            }}
+          <button
             onClick={handleShare}
-          />
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <img src="/icon/share.svg" alt="Share" width="24" height="24" />
+          </button>
         </div>
         <div className="recipe-wrapper">
           <img
