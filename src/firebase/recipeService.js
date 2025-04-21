@@ -18,10 +18,14 @@ export const recipeService = {
       return {
         ...data,
         id: parseInt(doc.id, 10),
-        image: './image/' + data.image,
+        image: data.image.startsWith('./')
+          ? data.image
+          : `./image/${data.image}`,
         iconInfo: data.iconInfo.map((icon) => ({
           ...icon,
-          image: './icon/' + icon.image,
+          image: icon.image.startsWith('./')
+            ? icon.image
+            : `./icon/${icon.image}`,
         })),
       };
     });
@@ -36,24 +40,9 @@ export const recipeService = {
 
   // Додати новий рецепт
   async addRecipe(recipe) {
-    // Перетворюємо шляхи зображень
-    const processedRecipe = {
-      ...recipe,
-      image: recipe.image.replace('./image/', ''),
-      iconInfo: recipe.iconInfo.map((icon) => ({
-        ...icon,
-        image: icon.image.replace('./icon/', ''),
-      })),
-    };
-
-    // Використовуємо setDoc замість addDoc, щоб зберегти оригінальний ID
     const docRef = doc(db, COLLECTION_NAME, String(recipe.id));
-    await setDoc(docRef, processedRecipe);
-
-    return {
-      id: recipe.id,
-      ...recipe,
-    };
+    await setDoc(docRef, recipe);
+    return recipe;
   },
 
   // Оновити рецепт

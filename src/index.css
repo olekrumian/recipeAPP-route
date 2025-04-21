@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* color */
   --white: #ffffff;
@@ -388,13 +392,9 @@ main {
 .favorite-btn {
   border: none;
   background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.favorite-btn-active>svg,
-.favorite-btn-active>svg>path {
+.favorite-btn-active>svg path {
   fill: rgb(255, 172, 172);
   stroke: rgb(255, 172, 172);
 }
@@ -445,6 +445,40 @@ main {
   text-align: center;
 }
 
+.error-find {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.error-title {
+  font-size: 2.4rem;
+  text-align: center;
+  color: var(--font-color);
+  margin-bottom: 2rem;
+  max-width: 80%;
+}
+
+.error-img {
+  width: 10rem;
+  height: 10rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.error-img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
 .recipe-wrapper {
   margin: 0rem 0rem 5rem 0rem;
   width: 100%;
@@ -492,6 +526,15 @@ main {
   color: var(--font-color);
 }
 
+.recipe-actions {
+  display: flex;
+  align-items: center;
+}
+
+.recipe-actions img:hover {
+  opacity: 0.7;
+}
+
 .header-menu-wrapper {
   margin: 1rem 0rem 1rem 0rem;
   width: 100%;
@@ -514,7 +557,7 @@ main {
 
 .error-find {
   margin-top: 2rem;
-  width: 23rem;
+  width: 40rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -836,15 +879,13 @@ main {
   }
 
   .favorite-btn {
+    width: 25px;
+    height: 23px;
     border: none;
     background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
-  .favorite-btn-active>svg,
-  .favorite-btn-active>svg>path {
+  .favorite-btn-active>svg path {
     fill: rgb(255, 172, 172);
     stroke: rgb(255, 172, 172);
   }
@@ -964,7 +1005,7 @@ main {
 
   .error-find {
     margin-top: 2rem;
-    width: 23rem;
+    width: 40rem;
     display: flex;
     flex-direction: column;
     align-items: center;

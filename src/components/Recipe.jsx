@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import back from '../assets/img/backarrov.svg';
-import shareIcon from '../assets/img/icons8-share.svg';
+import bake from '../assets/img/bake.svg';
 import { recipeService } from '../firebase/recipeService';
 
 const Recipe = () => {
@@ -67,18 +67,38 @@ const Recipe = () => {
     const shareUrl = `${window.location.origin}${location.pathname}`;
     if (navigator.share) {
       navigator.share({
-        title: recipe?.name || 'Рецепт',
+        title: recipe.name,
+        text: `Перевір цей чудовий рецепт: ${recipe.name}\n${shareUrl}`,
         url: shareUrl,
       });
     } else {
-      navigator.clipboard.writeText(shareUrl);
-      alert('Посилання скопійовано!');
+      navigator.clipboard
+        .writeText(`Перевір цей чудовий рецепт: ${recipe.name}\n${shareUrl}`)
+        .then(() => {
+          alert('Посилання скопійовано в буфер обміну!');
+        });
     }
   };
 
   const getImagePath = (path) => {
     if (!path) return '';
-    return path.replace('./', '/');
+    // Якщо це повний URL (Firebase Storage)
+    if (path.startsWith('http')) {
+      return path;
+    }
+    // Якщо це відносний шлях для іконок
+    if (path.includes('./icon/')) {
+      return path.replace('./', '/');
+    }
+    // Якщо це відносний шлях для зображень рецептів
+    if (path.includes('./image/')) {
+      return path.replace('./', '/');
+    }
+    // Якщо це просто назва файлу, додаємо шлях
+    if (!path.includes('./') && !path.includes('http')) {
+      return `/image/${path}`;
+    }
+    return path;
   };
 
   if (loading) {
@@ -86,7 +106,16 @@ const Recipe = () => {
   }
 
   if (!recipe) {
-    return <div>Рецепт не знайдено</div>;
+    return (
+      <div className="error-find" style={{ textAlign: 'center' }}>
+        <h3 className="error-title">
+          Рецепт не знайдено, спробуйте повернутися на головну
+        </h3>
+        <Link to="/">
+          <img className="error-img" src={bake} alt="error" />
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -97,20 +126,16 @@ const Recipe = () => {
             <img src={back} alt="" />
             <span>Назад</span>
           </Link>
-          <img
-            className="logo"
-            src={shareIcon}
-            alt="share"
-            width={24}
-            height={24}
-            style={{
-              cursor: 'pointer',
-              minWidth: 24,
-              minHeight: 24,
-              color: '#112d4e',
-            }}
+          <button
             onClick={handleShare}
-          />
+            style={{
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <img src="/icon/share.svg" alt="Share" width="24" height="24" />
+          </button>
         </div>
         <div className="recipe-wrapper">
           <img
