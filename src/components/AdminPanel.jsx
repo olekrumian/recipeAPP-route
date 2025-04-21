@@ -226,6 +226,9 @@ const AdminPanel = () => {
                   {...register('iconInfo.0.info', {
                     required: "Час обов'язковий",
                   })}
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9г\.\s]+"
                   placeholder="1г. 30хв."
                   className="form-input"
                 />
@@ -236,6 +239,9 @@ const AdminPanel = () => {
                   {...register('iconInfo.1.info', {
                     required: "Складність обов'язкова",
                   })}
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9/]+"
                   placeholder="5/10"
                   className="form-input"
                 />
@@ -246,6 +252,9 @@ const AdminPanel = () => {
                   {...register('iconInfo.2.info', {
                     required: "Кількість порцій обов'язкова",
                   })}
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9\s]+"
                   placeholder="4 о."
                   className="form-input"
                 />

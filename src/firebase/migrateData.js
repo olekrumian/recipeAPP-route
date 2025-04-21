@@ -1,5 +1,28 @@
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from 'firebase/firestore';
 import { recipes } from '../data/data.js';
-import { recipeService } from './recipeService.js';
+import { db } from './migrationConfig.js';
+
+const COLLECTION_NAME = 'recipes';
+
+const recipeService = {
+  async clearAllRecipes() {
+    const querySnapshot = await getDocs(collection(db, COLLECTION_NAME));
+    const deletePromises = querySnapshot.docs.map((doc) => deleteDoc(doc.ref));
+    await Promise.all(deletePromises);
+  },
+
+  async addRecipe(recipe) {
+    const docRef = doc(db, COLLECTION_NAME, String(recipe.id));
+    await setDoc(docRef, recipe);
+    return recipe;
+  },
+};
 
 export const migrateDataToFirestore = async () => {
   try {

@@ -13,22 +13,10 @@ export const recipeService = {
   // Отримати всі рецепти
   async getAllRecipes() {
     const querySnapshot = await getDocs(collection(db, COLLECTION_NAME));
-    return querySnapshot.docs.map((doc) => {
-      const data = doc.data();
-      return {
-        ...data,
-        id: parseInt(doc.id, 10),
-        image: data.image.startsWith('./')
-          ? data.image.replace('./', '/')
-          : data.image,
-        iconInfo: data.iconInfo.map((icon) => ({
-          ...icon,
-          image: icon.image.startsWith('./')
-            ? icon.image.replace('./', '/')
-            : icon.image,
-        })),
-      };
-    });
+    return querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: parseInt(doc.id, 10),
+    }));
   },
 
   // Очистити всі рецепти

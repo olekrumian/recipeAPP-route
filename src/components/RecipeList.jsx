@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import bake from '../assets/img/bake.svg';
 
 export default function RecipeList({
@@ -8,19 +8,12 @@ export default function RecipeList({
   handleAddToFavorites,
   favorites,
 }) {
-  const location = useLocation();
-
   const getImagePath = (path) => {
     if (!path) return '';
-    // Якщо це повний URL (Firebase Storage)
-    if (path.startsWith('http')) {
-      return path;
-    }
-    // Якщо це відносний шлях для іконок
-    if (path.includes('./icon/')) {
+    // Для локальних зображень
+    if (path.startsWith('./')) {
       return path.replace('./', '/');
     }
-    // Якщо це відносний шлях для зображень рецептів
     return path;
   };
 
@@ -52,7 +45,14 @@ export default function RecipeList({
           >
             <div className="recipe-item-inner">
               <div className="image">
-                <img src={getImagePath(recipe.image)} alt={recipe.name} />
+                <img
+                  src={getImagePath(recipe.image)}
+                  alt={recipe.name}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = bake;
+                  }}
+                />
               </div>
               <div className="description">
                 <div className="description-title-wrapper">

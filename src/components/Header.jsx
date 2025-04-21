@@ -1,9 +1,8 @@
-import find from '../assets/img/find.svg'
-import favouriteBook from '../assets/img/favourite_book.svg'
+import React from 'react';
 
 const handleSubmit = (e) => {
-  e.preventDefault()
-}
+  e.preventDefault();
+};
 
 export default function Header({ searchRecipe, favorites, toggleFavorite }) {
   return (
@@ -20,16 +19,30 @@ export default function Header({ searchRecipe, favorites, toggleFavorite }) {
           />
           <label htmlFor="find">Пошук</label>
           <button type="button" className="form-find-btn">
-            <img src={find} alt="Пошук" />
+            <img
+              src="/src/assets/img/find.svg"
+              alt="Пошук"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.style.display = 'none';
+              }}
+            />
           </button>
         </form>
         <button
           className="favorite-button"
           onClick={() => {
-            toggleFavorite()
+            toggleFavorite();
           }}
         >
-          <img src={favouriteBook} alt="" />
+          <img
+            src="/src/assets/img/favourite_book.svg"
+            alt=""
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.style.display = 'none';
+            }}
+          />
           <span
             className={
               favorites.length > 0 ? 'active-favorite' : 'non-favorite'
@@ -40,5 +53,5 @@ export default function Header({ searchRecipe, favorites, toggleFavorite }) {
         </button>
       </div>
     </>
-  )
+  );
 }

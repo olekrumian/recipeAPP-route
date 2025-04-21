@@ -82,15 +82,10 @@ const Recipe = () => {
 
   const getImagePath = (path) => {
     if (!path) return '';
-    // Якщо це повний URL (Firebase Storage)
-    if (path.startsWith('http')) {
-      return path;
-    }
-    // Якщо це відносний шлях для іконок
-    if (path.includes('./icon/')) {
+    // Для локальних зображень
+    if (path.startsWith('./')) {
       return path.replace('./', '/');
     }
-    // Якщо це відносний шлях для зображень рецептів
     return path;
   };
 
@@ -134,6 +129,10 @@ const Recipe = () => {
           <img
             className="recipe-img"
             src={getImagePath(recipe.image)}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = bake;
+            }}
             width="250"
             alt={recipe.name}
           />
