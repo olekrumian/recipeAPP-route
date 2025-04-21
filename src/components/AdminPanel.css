@@ -156,7 +156,7 @@
 
 .button {
   padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -192,6 +192,9 @@
 
 .button-full {
   width: 100%;
+  font-size: 1.4rem;
+  padding: 1.2rem 1.5rem;
+  margin: 2rem 0;
 }
 
 .recipe-info-grid {
@@ -212,6 +215,12 @@
 .step-item {
   display: flex;
   gap: 1rem;
+}
+
+.ingredient-list button,
+.step-list button {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .table-container {
@@ -262,6 +271,17 @@
   /* Ще більший розмір для назв страв */
   font-weight: 400;
   /* Додаємо невелику жирність */
+}
+
+.table td a {
+  color: #3b82f6;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.table td a:hover {
+  color: #2563eb;
+  text-decoration: underline;
 }
 
 .actions {
@@ -326,6 +346,6 @@
 
   .button {
     padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+    font-size: 1.5rem;
   }
 }

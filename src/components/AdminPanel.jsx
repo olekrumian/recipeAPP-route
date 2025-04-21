@@ -7,10 +7,44 @@ import {
 } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authService } from '../firebase/authService';
 import { recipeService } from '../firebase/recipeService';
 import './AdminPanel.css';
+
+const formatCookingTime = (time) => {
+  // Перевіряємо чи це просто число (хвилини)
+  const minutes = parseInt(time);
+  if (!isNaN(minutes)) {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    if (hours > 0) {
+      return `${hours}г. ${
+        remainingMinutes > 0 ? remainingMinutes + 'хв.' : ''
+      }`;
+    }
+    return `${minutes}хв.`;
+  }
+  return time; // Повертаємо як є, якщо вже відформатовано
+};
+
+const formatDifficulty = (difficulty) => {
+  // Перевіряємо чи це просто число
+  const level = parseInt(difficulty);
+  if (!isNaN(level)) {
+    return `${level}/10`;
+  }
+  return difficulty;
+};
+
+const formatServings = (servings) => {
+  // Перевіряємо чи це просто число
+  const count = parseInt(servings);
+  if (!isNaN(count)) {
+    return `${count} о.`;
+  }
+  return servings;
+};
 
 const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
@@ -141,12 +175,19 @@ const AdminPanel = () => {
       const maxId = Math.max(...recipes.map((recipe) => recipe.id), 0);
       const newId = maxId + 1;
 
+      // Форматуємо дані перед збереженням
+      const formattedIconInfo = [
+        { ...data.iconInfo[0], info: formatCookingTime(data.iconInfo[0].info) },
+        { ...data.iconInfo[1], info: formatDifficulty(data.iconInfo[1].info) },
+        { ...data.iconInfo[2], info: formatServings(data.iconInfo[2].info) },
+      ];
+
       const recipeData = {
         id: newId,
         name: data.name,
         category: data.category,
         image: imageUrl,
-        iconInfo: data.iconInfo,
+        iconInfo: formattedIconInfo,
         srcIngredient: data.srcIngredient,
         description: data.description,
       };
@@ -337,7 +378,7 @@ const AdminPanel = () => {
                 <tr>
                   <th>ID</th>
                   <th>Назва</th>
-                  <th>Дії</th>
+                  <th style={{ textAlign: 'right' }}>Дії</th>
                 </tr>
               </thead>
               <tbody>
@@ -346,7 +387,22 @@ const AdminPanel = () => {
                   .map((recipe) => (
                     <tr key={recipe.id}>
                       <td>{recipe.id}</td>
-                      <td>{recipe.name}</td>
+                      <td>
+                        <Link
+                          to={`/recipe/${recipe.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            color: '#3b82f6',
+                            textDecoration: 'none',
+                            ':hover': {
+                              textDecoration: 'underline',
+                            },
+                          }}
+                        >
+                          {recipe.name}
+                        </Link>
+                      </td>
                       <td>
                         <div className="actions">
                           {deleteConfirm === recipe.id ? (
