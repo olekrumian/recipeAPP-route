@@ -27,26 +27,6 @@ export default function RecipeList({
     return path;
   };
 
-  const handleShare = (e, recipe) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const url = `${window.location.origin}/recipe/${recipe.id}`;
-    if (navigator.share) {
-      navigator.share({
-        title: recipe.name,
-        text: `Перевір цей чудовий рецепт: ${recipe.name}\n${url}`,
-        url: url,
-      });
-    } else {
-      navigator.clipboard
-        .writeText(`Перевір цей чудовий рецепт: ${recipe.name}\n${url}`)
-        .then(() => {
-          alert('Посилання скопійовано в буфер обміну!');
-        });
-    }
-  };
-
   if (!menuItem || menuItem.length === 0) {
     return (
       <div
@@ -81,22 +61,6 @@ export default function RecipeList({
                 <div className="description-title-wrapper">
                   <h3 className="description-title">{recipe.name}</h3>
                   <div className="recipe-actions">
-                    <button
-                      onClick={(e) => handleShare(e, recipe)}
-                      style={{
-                        background: 'transparent',
-                        border: 'none',
-                        marginRight: '10px',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <img
-                        src="/icon/share.svg"
-                        alt="Share"
-                        width="24"
-                        height="24"
-                      />
-                    </button>
                     <button
                       className={`favorite-btn ${
                         favorites.some(
