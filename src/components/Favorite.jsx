@@ -9,7 +9,23 @@ export default function Favorite({
 }) {
   const getImagePath = (path) => {
     if (!path) return '';
-    return path.replace('./', '/');
+    // Якщо це повний URL (Firebase Storage)
+    if (path.startsWith('http')) {
+      return path;
+    }
+    // Якщо це відносний шлях для іконок
+    if (path.includes('./icon/')) {
+      return path.replace('./', '/');
+    }
+    // Якщо це відносний шлях для зображень рецептів
+    if (path.includes('./image/')) {
+      return path.replace('./', '/');
+    }
+    // Якщо це просто назва файлу, додаємо шлях
+    if (!path.includes('./') && !path.includes('http')) {
+      return `/image/${path}`;
+    }
+    return path;
   };
 
   return (
