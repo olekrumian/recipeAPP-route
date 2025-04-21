@@ -192,7 +192,6 @@ main {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  background: var(--bg-color);
   scrollbar-width: none;
 }
 
@@ -669,7 +668,6 @@ main {
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    background: var(--bg-color);
     scrollbar-width: none;
   }
 

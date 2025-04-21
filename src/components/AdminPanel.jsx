@@ -162,7 +162,7 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+    <div className="min-h-screen bg-gray-900 text-white py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
         <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
           <div className="max-w-md mx-auto">
@@ -190,7 +190,7 @@ const AdminPanel = () => {
                   </label>
                   <input
                     {...register('name', { required: "Назва обов'язкова" })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
                   />
                   {errors.name && (
                     <span className="text-sm text-red-500">
@@ -208,7 +208,7 @@ const AdminPanel = () => {
                     {...register('category', {
                       required: "Категорія обов'язкова",
                     })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
                   >
                     <option value="">Виберіть категорію</option>
                     <option value="Обід">Обід</option>
@@ -236,7 +236,7 @@ const AdminPanel = () => {
                     {...register('image', {
                       required: "Зображення обов'язкове",
                     })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
                   />
                   {errors.image && (
                     <span className="text-sm text-red-500">
@@ -260,7 +260,7 @@ const AdminPanel = () => {
                           required: "Час обов'язковий",
                         })}
                         placeholder="1г. 30хв."
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
                       />
                     </div>
                     <div>
@@ -272,7 +272,7 @@ const AdminPanel = () => {
                           required: "Складність обов'язкова",
                         })}
                         placeholder="5/10"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
                       />
                     </div>
                     <div>
@@ -284,7 +284,7 @@ const AdminPanel = () => {
                           required: "Кількість порцій обов'язкова",
                         })}
                         placeholder="4 о."
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
                       />
                     </div>
                   </div>
@@ -302,7 +302,7 @@ const AdminPanel = () => {
                           required: "Інгредієнт обов'язковий",
                         })}
                         placeholder="Інгредієнт"
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="flex-1 px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
                       />
                       <button
                         type="button"
@@ -334,7 +334,7 @@ const AdminPanel = () => {
                           required: "Крок обов'язковий",
                         })}
                         placeholder="Опис кроку"
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="flex-1 px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
                         rows="3"
                       />
                       <button
