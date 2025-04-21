@@ -161,6 +161,11 @@ const AdminPanel = () => {
     }
   };
 
+  const formClasses =
+    'w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none';
+  const inputClasses =
+    'w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 appearance-none';
+
   return (
     <div className="min-h-screen bg-gray-900 text-white py-6 flex flex-col justify-center sm:py-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -172,7 +177,7 @@ const AdminPanel = () => {
               </h2>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                className="px-6 py-3 text-lg bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors shadow-md active:transform active:scale-95"
               >
                 Вийти
               </button>
@@ -190,7 +195,7 @@ const AdminPanel = () => {
                   </label>
                   <input
                     {...register('name', { required: "Назва обов'язкова" })}
-                    className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
+                    className={inputClasses}
                   />
                   {errors.name && (
                     <span className="text-sm text-red-500">
@@ -208,7 +213,7 @@ const AdminPanel = () => {
                     {...register('category', {
                       required: "Категорія обов'язкова",
                     })}
-                    className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
+                    className={formClasses}
                   >
                     <option value="">Виберіть категорію</option>
                     <option value="Обід">Обід</option>
@@ -236,7 +241,7 @@ const AdminPanel = () => {
                     {...register('image', {
                       required: "Зображення обов'язкове",
                     })}
-                    className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
+                    className={`${inputClasses} file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100`}
                   />
                   {errors.image && (
                     <span className="text-sm text-red-500">
@@ -260,7 +265,7 @@ const AdminPanel = () => {
                           required: "Час обов'язковий",
                         })}
                         placeholder="1г. 30хв."
-                        className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
+                        className={inputClasses}
                       />
                     </div>
                     <div>
@@ -272,7 +277,7 @@ const AdminPanel = () => {
                           required: "Складність обов'язкова",
                         })}
                         placeholder="5/10"
-                        className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
+                        className={inputClasses}
                       />
                     </div>
                     <div>
@@ -284,7 +289,7 @@ const AdminPanel = () => {
                           required: "Кількість порцій обов'язкова",
                         })}
                         placeholder="4 о."
-                        className="w-full px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
+                        className={inputClasses}
                       />
                     </div>
                   </div>
@@ -302,12 +307,12 @@ const AdminPanel = () => {
                           required: "Інгредієнт обов'язковий",
                         })}
                         placeholder="Інгредієнт"
-                        className="flex-1 px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
+                        className={inputClasses}
                       />
                       <button
                         type="button"
                         onClick={() => removeIngredient(index)}
-                        className="px-3 py-2 text-white bg-red-500 rounded-md hover:bg-red-600"
+                        className="px-4 py-3 text-lg text-white bg-red-500 rounded-lg hover:bg-red-600 shadow-md active:transform active:scale-95 min-w-[120px]"
                       >
                         Видалити
                       </button>
@@ -316,7 +321,7 @@ const AdminPanel = () => {
                   <button
                     type="button"
                     onClick={() => appendIngredient({ ingredient: '' })}
-                    className="w-full px-3 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                    className="w-full px-6 py-4 text-lg text-white bg-blue-500 rounded-lg hover:bg-blue-600 shadow-md active:transform active:scale-95"
                   >
                     Додати інгредієнт
                   </button>
@@ -334,13 +339,13 @@ const AdminPanel = () => {
                           required: "Крок обов'язковий",
                         })}
                         placeholder="Опис кроку"
-                        className="flex-1 px-6 py-4 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-[16px]"
+                        className={`${formClasses} min-h-[100px]`}
                         rows="3"
                       />
                       <button
                         type="button"
                         onClick={() => removeDescription(index)}
-                        className="px-3 py-2 text-white bg-red-500 rounded-md hover:bg-red-600"
+                        className="px-4 py-3 text-lg text-white bg-red-500 rounded-lg hover:bg-red-600 shadow-md active:transform active:scale-95 min-w-[120px]"
                       >
                         Видалити
                       </button>
@@ -349,7 +354,7 @@ const AdminPanel = () => {
                   <button
                     type="button"
                     onClick={() => appendDescription({ step: '' })}
-                    className="w-full px-3 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                    className="w-full px-6 py-4 text-lg text-white bg-blue-500 rounded-lg hover:bg-blue-600 shadow-md active:transform active:scale-95"
                   >
                     Додати крок
                   </button>
@@ -361,7 +366,7 @@ const AdminPanel = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-600 disabled:bg-gray-400"
+                  className="w-full px-6 py-4 text-lg font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 disabled:bg-gray-400 shadow-md active:transform active:scale-95"
                 >
                   {loading ? 'Збереження...' : 'Зберегти рецепт'}
                 </button>
