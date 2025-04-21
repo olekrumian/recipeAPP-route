@@ -57,7 +57,7 @@
 
 .form-label {
   display: block;
-  font-size: 0.875rem;
+  font-size: 1.6rem;
   font-weight: 500;
   color: #374151;
   margin-bottom: 0.5rem;
@@ -70,7 +70,7 @@
   padding: 0.75rem;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.6rem;
   outline: none;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -85,7 +85,7 @@
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
   background-color: white;
-  font-size: 1rem;
+  font-size: 1.6rem;
   color: #1a1a1a;
   cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
@@ -271,19 +271,39 @@
 }
 
 .message {
-  margin-top: 1rem;
-  padding: 1rem;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem 2rem;
   border-radius: 0.5rem;
+  z-index: 1000;
+  animation: slideDown 0.3s ease-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 }
 
 .message-success {
   background-color: #d1fae5;
   color: #065f46;
+  border: 1px solid #34d399;
 }
 
 .message-error {
   background-color: #fee2e2;
   color: #991b1b;
+  border: 1px solid #f87171;
 }
 
 /* Responsive styles */

@@ -69,6 +69,13 @@ const AdminPanel = () => {
     loadRecipes();
   }, []);
 
+  const showMessage = (text, isSuccess = true) => {
+    setMessage(text);
+    setTimeout(() => {
+      setMessage('');
+    }, 3000);
+  };
+
   const handleLogout = async () => {
     try {
       await authService.logout();
@@ -110,11 +117,11 @@ const AdminPanel = () => {
         localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       }
 
-      setMessage('Рецепт успішно видалено');
+      showMessage('Рецепт успішно видалено');
       setDeleteConfirm(null);
     } catch (error) {
       console.error('Error deleting recipe:', error);
-      setMessage('Помилка при видаленні рецепта');
+      showMessage('Помилка при видаленні рецепта', false);
     }
   };
 
@@ -146,11 +153,11 @@ const AdminPanel = () => {
 
       await recipeService.addRecipe(recipeData);
       setRecipes([...recipes, recipeData]);
-      setMessage('Рецепт успішно додано!');
+      showMessage('Рецепт успішно додано!');
       reset();
     } catch (error) {
       console.error('Error adding recipe:', error);
-      setMessage('Помилка при додаванні рецепта');
+      showMessage('Помилка при додаванні рецепта', false);
     } finally {
       setLoading(false);
     }
