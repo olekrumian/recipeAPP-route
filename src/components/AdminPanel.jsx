@@ -227,8 +227,6 @@ const AdminPanel = () => {
                     required: "Час обов'язковий",
                   })}
                   type="text"
-                  inputMode="numeric"
-                  pattern="[0-9г\.\s]+"
                   placeholder="1г. 30хв."
                   className="form-input"
                 />
@@ -240,9 +238,7 @@ const AdminPanel = () => {
                     required: "Складність обов'язкова",
                   })}
                   type="text"
-                  inputMode="numeric"
-                  pattern="[0-9/]+"
-                  placeholder="5/10"
+                  placeholder="4/10"
                   className="form-input"
                 />
               </div>
@@ -253,8 +249,6 @@ const AdminPanel = () => {
                     required: "Кількість порцій обов'язкова",
                   })}
                   type="text"
-                  inputMode="numeric"
-                  pattern="[0-9\s]+"
                   placeholder="4 о."
                   className="form-input"
                 />

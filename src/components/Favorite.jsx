@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Favorite({
@@ -9,17 +9,23 @@ export default function Favorite({
 }) {
   const getImagePath = (path) => {
     if (!path) return '';
-    // Для локальних зображень
     if (path.startsWith('./')) {
       return path.replace('./', '/');
     }
     return path;
   };
 
+  useEffect(() => {
+    document.body.style.overflow = favoriteOpen ? 'hidden' : 'auto';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [favoriteOpen]);
+
   return (
     <section
       className={`favorite-container ${
-        favoriteOpen ? 'favorite-container-hiden' : ''
+        !favoriteOpen ? 'favorite-container-hiden' : ''
       }`}
     >
       <button className="favorite-close-button" onClick={toggleFavorite}>

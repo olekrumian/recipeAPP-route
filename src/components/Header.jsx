@@ -1,4 +1,5 @@
 import React from 'react';
+import favourite_book from '../assets/img/favourite_book.svg';
 
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -36,8 +37,8 @@ export default function Header({ searchRecipe, favorites, toggleFavorite }) {
           }}
         >
           <img
-            src="/src/assets/img/favourite_book.svg"
-            alt=""
+            src={favourite_book}
+            alt="Обрані рецепти"
             onError={(e) => {
               e.target.onerror = null;
               e.target.style.display = 'none';

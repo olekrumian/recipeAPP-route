@@ -182,6 +182,9 @@ main {
 
 .no-scroll {
   overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 .container {
@@ -789,26 +792,22 @@ input[type="file"] {
   flex-direction: column;
   padding: 4rem 5%;
   gap: 1.6rem;
-  position: absolute;
-  z-index: 1;
+  position: fixed;
+  z-index: 1000;
   top: 0;
   right: 0;
   width: 100%;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   background: var(--bg-color);
   border: var(--border);
   box-shadow: var(--shadow);
   border-radius: var(--border);
-  -webkit-border-radius: var(--border);
-  -moz-border-radius: var(--border);
-  -ms-border-radius: var(--border);
-  -o-border-radius: var(--border);
   transition: var(--transition);
-  -webkit-transition: var(--transition);
-  -moz-transition: var(--transition);
-  -ms-transition: var(--transition);
-  -o-transition: var(--transition);
+}
+
+.favorite-container-hiden {
+  transform: translateX(100%);
 }
 
 .recipe-item-favorite {
