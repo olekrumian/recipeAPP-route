@@ -341,39 +341,41 @@ const AdminPanel = () => {
                 </tr>
               </thead>
               <tbody>
-                {recipes.map((recipe) => (
-                  <tr key={recipe.id}>
-                    <td>{recipe.id}</td>
-                    <td>{recipe.name}</td>
-                    <td>
-                      <div className="actions">
-                        {deleteConfirm === recipe.id ? (
-                          <>
+                {recipes
+                  .sort((a, b) => b.id - a.id)
+                  .map((recipe) => (
+                    <tr key={recipe.id}>
+                      <td>{recipe.id}</td>
+                      <td>{recipe.name}</td>
+                      <td>
+                        <div className="actions">
+                          {deleteConfirm === recipe.id ? (
+                            <>
+                              <button
+                                onClick={() => handleDeleteRecipe(recipe.id)}
+                                className="button button-success"
+                              >
+                                Підтвердити
+                              </button>
+                              <button
+                                onClick={() => setDeleteConfirm(null)}
+                                className="button button-danger"
+                              >
+                                Скасувати
+                              </button>
+                            </>
+                          ) : (
                             <button
-                              onClick={() => handleDeleteRecipe(recipe.id)}
-                              className="button button-success"
-                            >
-                              Підтвердити
-                            </button>
-                            <button
-                              onClick={() => setDeleteConfirm(null)}
+                              onClick={() => setDeleteConfirm(recipe.id)}
                               className="button button-danger"
                             >
-                              Скасувати
+                              Видалити
                             </button>
-                          </>
-                        ) : (
-                          <button
-                            onClick={() => setDeleteConfirm(recipe.id)}
-                            className="button button-danger"
-                          >
-                            Видалити
-                          </button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
