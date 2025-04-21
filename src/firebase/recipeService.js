@@ -18,6 +18,9 @@ export const recipeService = {
       return {
         ...data,
         id: parseInt(doc.id, 10),
+        image: data.image.startsWith('./')
+          ? data.image
+          : `./image/${data.image}`,
         iconInfo: data.iconInfo.map((icon) => ({
           ...icon,
           image: icon.image.startsWith('./')
