@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import back from '../assets/img/backarrov.svg';
 import bake from '../assets/img/bake.svg';
 import { recipeService } from '../firebase/recipeService';
@@ -81,6 +81,17 @@ const Recipe = () => {
     }
   };
 
+  const handleGoBack = () => {
+    // Спроба повернутися на попередню сторінку
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      // Якщо немає попередньої сторінки (користувач відкрив пряме посилання),
+      // перенаправляємо на головну
+      navigate('/');
+    }
+  };
+
   const getImagePath = (path) => {
     if (!path) return '';
     // Для локальних зображень
@@ -113,7 +124,7 @@ const Recipe = () => {
         <div className="header-menu-wrapper">
           <button
             className="to-back"
-            onClick={() => navigate(-1)}
+            onClick={handleGoBack}
             style={{
               background: 'transparent',
               border: 'none',
