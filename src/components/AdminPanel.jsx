@@ -12,6 +12,12 @@ import { authService } from '../firebase/authService';
 import { recipeService } from '../firebase/recipeService';
 import './AdminPanel.css';
 
+/**
+ * Version: 2.0.0
+ * AdminPanel component - додана можливість редагування рецептів та управління категоріями
+ * Додане автоматичне форматування для часу, складності та кількості порцій
+ */
+
 const formatCookingTime = (time) => {
   // Перевіряємо чи це просто число (хвилини)
   const minutes = parseInt(time);
