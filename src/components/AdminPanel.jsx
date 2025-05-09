@@ -52,11 +52,66 @@ const formatServings = (servings) => {
   return servings;
 };
 
+// Функція для форматування часу під час введення
+const formatTimeInput = (value) => {
+  if (!value) return '';
+
+  // Якщо містить "г." або "хв.", вважаємо, що вже відформатовано
+  if (value.includes('г.') || value.includes('хв.')) return value;
+
+  // Перевіряємо, чи це просто число
+  const minutes = parseInt(value);
+  if (isNaN(minutes)) return value;
+
+  if (minutes >= 60) {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    if (remainingMinutes > 0) {
+      return `${hours}г. ${remainingMinutes}хв.`;
+    }
+    return `${hours}г.`;
+  }
+
+  return `${minutes}хв.`;
+};
+
+// Функція для форматування складності під час введення
+const formatDifficultyInput = (value) => {
+  if (!value) return '';
+
+  // Якщо містить "/10", вважаємо, що вже відформатовано
+  if (value.includes('/10')) return value;
+
+  // Перевіряємо, чи це просто число від 1 до 10
+  const level = parseInt(value);
+  if (isNaN(level)) return value;
+
+  return `${level}/10`;
+};
+
+// Функція для форматування порцій під час введення
+const formatServingsInput = (value) => {
+  if (!value) return '';
+
+  // Якщо містить "о.", вважаємо, що вже відформатовано
+  if (value.includes('о.')) return value;
+
+  // Перевіряємо, чи це просто число
+  const servings = parseInt(value);
+  if (isNaN(servings)) return value;
+
+  return `${servings} о.`;
+};
+
 const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [editingRecipe, setEditingRecipe] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [newCategory, setNewCategory] = useState('');
+  const [deleteCategoryConfirm, setDeleteCategoryConfirm] = useState(null);
   const navigate = useNavigate();
 
   const {
@@ -65,6 +120,9 @@ const AdminPanel = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
+    watch,
+    getValues,
   } = useForm({
     defaultValues: {
       name: '',
@@ -79,10 +137,66 @@ const AdminPanel = () => {
     },
   });
 
+  // Отримуємо значення полів для відстеження змін
+  const timeValue = watch('iconInfo.0.info');
+  const difficultyValue = watch('iconInfo.1.info');
+  const servingsValue = watch('iconInfo.2.info');
+
+  // Ефекти для автоматичного форматування при зміні значень
+  useEffect(() => {
+    if (timeValue) {
+      const formattedTime = formatTimeInput(timeValue);
+      if (formattedTime !== timeValue) {
+        setValue('iconInfo.0.info', formattedTime);
+      }
+    }
+  }, [timeValue, setValue]);
+
+  useEffect(() => {
+    if (difficultyValue) {
+      const formattedDifficulty = formatDifficultyInput(difficultyValue);
+      if (formattedDifficulty !== difficultyValue) {
+        setValue('iconInfo.1.info', formattedDifficulty);
+      }
+    }
+  }, [difficultyValue, setValue]);
+
+  useEffect(() => {
+    if (servingsValue) {
+      const formattedServings = formatServingsInput(servingsValue);
+      if (formattedServings !== servingsValue) {
+        setValue('iconInfo.2.info', formattedServings);
+      }
+    }
+  }, [servingsValue, setValue]);
+
+  // Обробники події blur для форматування після втрати фокусу
+  const handleTimeBlur = () => {
+    const currentValue = getValues('iconInfo.0.info');
+    if (currentValue) {
+      setValue('iconInfo.0.info', formatTimeInput(currentValue));
+    }
+  };
+
+  const handleDifficultyBlur = () => {
+    const currentValue = getValues('iconInfo.1.info');
+    if (currentValue) {
+      setValue('iconInfo.1.info', formatDifficultyInput(currentValue));
+    }
+  };
+
+  const handleServingsBlur = () => {
+    const currentValue = getValues('iconInfo.2.info');
+    if (currentValue) {
+      setValue('iconInfo.2.info', formatServingsInput(currentValue));
+    }
+  };
+
   const {
     fields: ingredientFields,
     append: appendIngredient,
     remove: removeIngredient,
+    replace: replaceIngredients,
   } = useFieldArray({
     control,
     name: 'srcIngredient',
@@ -92,6 +206,7 @@ const AdminPanel = () => {
     fields: descriptionFields,
     append: appendDescription,
     remove: removeDescription,
+    replace: replaceDescriptions,
   } = useFieldArray({
     control,
     name: 'description',
@@ -102,6 +217,12 @@ const AdminPanel = () => {
       try {
         const allRecipes = await recipeService.getAllRecipes();
         setRecipes(allRecipes);
+
+        // Витягаємо унікальні категорії з рецептів
+        const uniqueCategories = [
+          ...new Set(allRecipes.map((recipe) => recipe.category)),
+        ].sort();
+        setCategories(uniqueCategories);
       } catch (error) {
         console.error('Error loading recipes:', error);
       }
@@ -165,21 +286,86 @@ const AdminPanel = () => {
     }
   };
 
+  const handleEditRecipe = (recipe) => {
+    setEditingRecipe(recipe);
+
+    // Заповнюємо форму даними рецепту
+    setValue('name', recipe.name);
+    setValue('category', recipe.category);
+
+    // Заповнюємо iconInfo
+    if (recipe.iconInfo && recipe.iconInfo.length >= 3) {
+      setValue('iconInfo.0.info', recipe.iconInfo[0].info);
+      setValue('iconInfo.1.info', recipe.iconInfo[1].info);
+      setValue('iconInfo.2.info', recipe.iconInfo[2].info);
+    }
+
+    // Заповнюємо інгредієнти
+    if (recipe.srcIngredient && recipe.srcIngredient.length > 0) {
+      replaceIngredients(recipe.srcIngredient);
+    }
+
+    // Заповнюємо кроки приготування
+    if (recipe.description && recipe.description.length > 0) {
+      replaceDescriptions(recipe.description);
+    }
+
+    // Прокручуємо до форми
+    document
+      .querySelector('.form-container')
+      .scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const cancelEdit = () => {
+    setEditingRecipe(null);
+    reset();
+  };
+
+  const handleAddCategory = () => {
+    if (newCategory && !categories.includes(newCategory)) {
+      setCategories([...categories, newCategory].sort());
+      setNewCategory('');
+      showMessage('Категорію успішно додано!');
+    } else if (categories.includes(newCategory)) {
+      showMessage('Така категорія вже існує', false);
+    } else {
+      showMessage('Введіть назву категорії', false);
+    }
+  };
+
+  const handleDeleteCategory = (category) => {
+    // Перевіряємо, чи не використовується категорія якимось рецептом
+    const isUsed = recipes.some((recipe) => recipe.category === category);
+
+    if (isUsed) {
+      showMessage(
+        `Категорія "${category}" використовується в рецептах і не може бути видалена`,
+        false
+      );
+      setDeleteCategoryConfirm(null);
+      return;
+    }
+
+    setCategories(categories.filter((c) => c !== category));
+    showMessage(`Категорію "${category}" видалено`);
+    setDeleteCategoryConfirm(null);
+  };
+
   const onSubmit = async (data) => {
     try {
       setLoading(true);
       const storage = getStorage();
 
       let imageUrl = '';
-      if (data.image[0]) {
+      if (data.image && data.image[0]) {
         const fileName = `${Date.now()}-${data.image[0].name}`;
         const imageRef = ref(storage, `images/${fileName}`);
         await uploadBytes(imageRef, data.image[0]);
         imageUrl = await getDownloadURL(imageRef);
+      } else if (editingRecipe && editingRecipe.image) {
+        // Якщо редагуємо рецепт і нове зображення не вибрано, використовуємо існуюче
+        imageUrl = editingRecipe.image;
       }
-
-      const maxId = Math.max(...recipes.map((recipe) => recipe.id), 0);
-      const newId = maxId + 1;
 
       // Форматуємо дані перед збереженням
       const formattedIconInfo = [
@@ -189,7 +375,9 @@ const AdminPanel = () => {
       ];
 
       const recipeData = {
-        id: newId,
+        id: editingRecipe
+          ? editingRecipe.id
+          : Math.max(...recipes.map((recipe) => recipe.id), 0) + 1,
         name: data.name,
         category: data.category,
         image: imageUrl,
@@ -198,23 +386,42 @@ const AdminPanel = () => {
         description: data.description,
       };
 
-      await recipeService.addRecipe(recipeData);
-      setRecipes([...recipes, recipeData]);
-      showMessage('Рецепт успішно додано!');
+      if (editingRecipe) {
+        // Оновлюємо існуючий рецепт
+        await recipeService.updateRecipe(editingRecipe.id, recipeData);
+        setRecipes(
+          recipes.map((recipe) =>
+            recipe.id === editingRecipe.id ? recipeData : recipe
+          )
+        );
+        showMessage('Рецепт успішно оновлено!');
+        setEditingRecipe(null);
+      } else {
+        // Додаємо новий рецепт
+        await recipeService.addRecipe(recipeData);
+        setRecipes([...recipes, recipeData]);
+        showMessage('Рецепт успішно додано!');
+      }
+
       reset();
     } catch (error) {
-      console.error('Error adding recipe:', error);
-      showMessage('Помилка при додаванні рецепта', false);
+      console.error('Error saving recipe:', error);
+      showMessage('Помилка при збереженні рецепта', false);
     } finally {
       setLoading(false);
     }
   };
 
+  const formTitle = editingRecipe
+    ? `Редагування рецепту: ${editingRecipe.name}`
+    : 'Додати новий рецепт';
+  const submitButtonText = editingRecipe ? 'Оновити рецепт' : 'Зберегти рецепт';
+
   return (
     <div className="admin-container">
       <div className="admin-content">
         <div className="admin-header">
-          <h2 className="admin-title">Додати новий рецепт</h2>
+          <h2 className="admin-title">{formTitle}</h2>
           <button onClick={handleLogout} className="logout-button">
             Вийти
           </button>
@@ -239,12 +446,11 @@ const AdminPanel = () => {
               className="form-select"
             >
               <option value="">Виберіть категорію</option>
-              <option value="Обід">Обід</option>
-              <option value="Десерт">Десерт</option>
-              <option value="Печиво">Печиво</option>
-              <option value="Хліб">Хліб</option>
-              <option value="Вечеря">Вечеря</option>
-              <option value="Додатки">Додатки</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
             </select>
             {errors.category && (
               <span className="error-message">{errors.category.message}</span>
@@ -256,9 +462,20 @@ const AdminPanel = () => {
             <input
               type="file"
               accept="image/*"
-              {...register('image', { required: "Зображення обов'язкове" })}
+              {...register('image', {
+                required: editingRecipe ? false : "Зображення обов'язкове",
+              })}
               className="form-input"
             />
+            {editingRecipe && (
+              <p className="form-helper-text">
+                Поточне зображення:{' '}
+                {editingRecipe.image ? 'Завантажено' : 'Відсутнє'}.
+                {editingRecipe.image && (
+                  <em> Оберіть нове зображення лише якщо хочете замінити</em>
+                )}
+              </p>
+            )}
             {errors.image && (
               <span className="error-message">{errors.image.message}</span>
             )}
@@ -276,7 +493,12 @@ const AdminPanel = () => {
                   type="text"
                   placeholder="1г. 30хв."
                   className="form-input"
+                  onBlur={handleTimeBlur}
                 />
+                <p className="form-helper-text">
+                  Введіть час у хвилинах, наприклад "90" буде форматовано як
+                  "1г. 30хв."
+                </p>
               </div>
               <div>
                 <label className="form-label">Складність:</label>
@@ -287,7 +509,11 @@ const AdminPanel = () => {
                   type="text"
                   placeholder="4/10"
                   className="form-input"
+                  onBlur={handleDifficultyBlur}
                 />
+                <p className="form-helper-text">
+                  Введіть число, наприклад "5" буде форматовано як "5/10"
+                </p>
               </div>
               <div>
                 <label className="form-label">Кількість порцій:</label>
@@ -298,7 +524,11 @@ const AdminPanel = () => {
                   type="text"
                   placeholder="4 о."
                   className="form-input"
+                  onBlur={handleServingsBlur}
                 />
+                <p className="form-helper-text">
+                  Введіть число, наприклад "6" буде форматовано як "6 о."
+                </p>
               </div>
             </div>
           </div>
@@ -365,14 +595,93 @@ const AdminPanel = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="button button-success button-full"
-          >
-            {loading ? 'Збереження...' : 'Зберегти рецепт'}
-          </button>
+          <div className="form-actions">
+            <button
+              type="submit"
+              disabled={loading}
+              className="button button-success button-full"
+            >
+              {loading ? 'Збереження...' : submitButtonText}
+            </button>
+
+            {editingRecipe && (
+              <button
+                type="button"
+                onClick={cancelEdit}
+                className="button button-secondary button-full"
+                style={{ marginTop: '10px' }}
+              >
+                Скасувати редагування
+              </button>
+            )}
+          </div>
         </form>
+
+        {/* Секція управління категоріями */}
+        <div className="category-manager">
+          <h3 className="section-title">Управління категоріями</h3>
+
+          <div className="category-add-form">
+            <input
+              type="text"
+              value={newCategory}
+              onChange={(e) => setNewCategory(e.target.value)}
+              placeholder="Назва нової категорії"
+              className="form-input"
+            />
+            <button
+              onClick={handleAddCategory}
+              className="button button-primary"
+            >
+              Додати категорію
+            </button>
+          </div>
+
+          <div className="category-list">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Категорія</th>
+                  <th style={{ textAlign: 'right' }}>Дії</th>
+                </tr>
+              </thead>
+              <tbody>
+                {categories.map((category) => (
+                  <tr key={category}>
+                    <td>{category}</td>
+                    <td>
+                      <div className="actions">
+                        {deleteCategoryConfirm === category ? (
+                          <>
+                            <button
+                              onClick={() => handleDeleteCategory(category)}
+                              className="button button-success"
+                            >
+                              Підтвердити
+                            </button>
+                            <button
+                              onClick={() => setDeleteCategoryConfirm(null)}
+                              className="button button-danger"
+                            >
+                              Скасувати
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            onClick={() => setDeleteCategoryConfirm(category)}
+                            className="button button-danger"
+                          >
+                            Видалити
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
         <div className="table-container">
           <div className="table-header">
@@ -384,6 +693,7 @@ const AdminPanel = () => {
                 <tr>
                   <th>ID</th>
                   <th>Назва</th>
+                  <th>Категорія</th>
                   <th style={{ textAlign: 'right' }}>Дії</th>
                 </tr>
               </thead>
@@ -409,8 +719,16 @@ const AdminPanel = () => {
                           {recipe.name}
                         </Link>
                       </td>
+                      <td>{recipe.category}</td>
                       <td>
                         <div className="actions">
+                          <button
+                            onClick={() => handleEditRecipe(recipe)}
+                            className="button button-primary"
+                          >
+                            Редагувати
+                          </button>
+
                           {deleteConfirm === recipe.id ? (
                             <>
                               <button
