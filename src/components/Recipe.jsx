@@ -133,8 +133,10 @@ const Recipe = () => {
               cursor: 'pointer',
             }}
           >
-            <img src={back} alt="" />
-            <span>Назад</span>
+            <img src={back} alt="" style={{ marginRight: '5px' }} />
+            <span style={{ color: '#112d4e', fontWeight: '500' }}>
+              Повернутись назад або на головну
+            </span>
           </button>
           <button
             onClick={handleShare}
