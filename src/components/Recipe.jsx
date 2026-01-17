@@ -135,7 +135,7 @@ const Recipe = () => {
           >
             <img src={back} alt="" style={{ marginRight: '5px' }} />
             <span style={{ color: '#112d4e', fontWeight: '500' }}>
-              Повернутись назад або на головну
+              Назад
             </span>
           </button>
           <button
